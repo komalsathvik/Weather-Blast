@@ -21,6 +21,7 @@ function getWeatherByLocation() {
             const lon = position.coords.longitude;
             console.log(`Fetching weather data for current location: lat=${lat}, lon=${lon}`);
             fetchWeatherByCoordinates(lat, lon);
+
         }, () => {
             alert("Unable to retrieve your location.");
         });
@@ -61,7 +62,8 @@ function fetchLatLon(cityName) {
                 const lat = data.results[0].lat;
                 const lon = data.results[0].lon;
                 console.log(`Coordinates for city: lat=${lat}, lon=${lon}`);
-                fetchWeatherByCoordinates(lat, lon); // Now fetch weather by lat/lon
+                fetchWeatherByCoordinates(lat, lon);
+
             } else {
                 alert("Location not found. Please try entering a valid city name or pincode.");
                 console.error(`No results found for city: ${cityName}`);
@@ -81,6 +83,7 @@ function fetchWeatherByCoordinates(lat, lon) {
         .then(data => {
             console.log('Weather data from coordinates:', data);
             displayWeather(data);
+        
         })
         .catch(error => {
             console.error('Error fetching weather by coordinates:', error);
@@ -102,6 +105,9 @@ function displayWeather(data) {
     const city = data.name;
     const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', opt);
     const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', opt);
+    const lat = data.coord.lat;
+    const lon = data.coord.lon;
+    fetchPollution(lat,lon);
 
     //FOR BIG SCREENS
     document.getElementById("wi").innerText = `${weatherdes}`;
@@ -135,8 +141,70 @@ function displayWeather(data) {
     document.getElementById("city-input").value = '';
 }
 
-document.getElementById("id");
-var map = L.map('map', {
-    center: [51.505, -0.09],
-    zoom: 13
-});
+function fetchPollution(lat,lon){
+    const pollurl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    fetch(pollurl)
+    .then(response=>response.json())
+    .then(data=>{
+        console.log(data);
+        displayPollution(data);
+    })
+    .catch(error => {
+        console.error('Error fetching pollution info', error);
+    });
+
+}
+
+function displayPollution(data){
+    const aqi = data.list[0].main.aqi;
+    const co = data.list[0].components.co;
+    const no = data.list[0].components.no;
+    const no2 = data.list[0].components.no2;
+    const o3 = data.list[0].components.o3;
+    const so2 = data.list[0].components.so2;
+    const pm2 = data.list[0].components.pm2_5;
+    const pm10 = data.list[0].components.pm10;
+    const nh3 = data.list[0].components.nh3;
+
+    if (aqi===1){
+        document.getElementById("aqi").innerText = `Good`;
+        document.getElementById("aqi1").innerText = `Good`;
+    }
+    else if(aqi===2){
+        document.getElementById("aqi").innerText = `Fair`;
+        document.getElementById("aqi1").innerText = `Fair`;
+    }
+    else if(aqi===3){
+        document.getElementById("aqi").innerText = `Moderate`;
+        document.getElementById("aqi1").innerText = `Moderate`;
+    }
+    else if(aqi===4){
+        document.getElementById("aqi").innerText = `Poor`;
+        document.getElementById("aqi1").innerText = `Poor`;
+    }
+    else{
+        document.getElementById("aqi").innerText = `Very Poor`;
+        document.getElementById("aqi1").innerText = `Very Poor`;
+    }
+    
+
+    //FOR BIG SCREENS
+    document.getElementById("co").innerText = `${co} μg/m3`;
+    document.getElementById("no").innerText = `${no} μg/m3`;
+    document.getElementById("no2").innerText = `${no2} μg/m3`;
+    document.getElementById("o3").innerText = `${o3} μg/m3`;
+    document.getElementById("so2").innerText = `${so2} μg/m3`;
+    document.getElementById("pm2.5").innerText = `${pm2} μg/m3`;
+    document.getElementById("pm10").innerText = `${pm10} μg/m3`;
+    document.getElementById("nh3").innerText = `${nh3} μg/m3`;
+
+    //FOR SMALL SCREENS
+    document.getElementById("co1").innerText = `${co} μg/m3`;
+    document.getElementById("no1").innerText = `${no} μg/m3`;
+    document.getElementById("no21").innerText = `${no2} μg/m3`;
+    document.getElementById("o31").innerText = `${o3} μg/m3`;
+    document.getElementById("so21").innerText = `${so2} μg/m3`;
+    document.getElementById("pm2.51").innerText = `${pm2} μg/m3`;
+    document.getElementById("pm101").innerText = `${pm10} μg/m3`;
+    document.getElementById("nh31").innerText = `${nh3} μg/m3`;
+}    
