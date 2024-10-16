@@ -109,6 +109,10 @@ function displayWeather(data) {
     const lon = data.coord.lon;
     fetchPollution(lat,lon);
 
+    document.getElementById("weat").innerText =`Weather Information : ${city}`;
+    document.getElementById("air").innerText =`Air Pollution : ${city}`;
+
+
     //FOR BIG SCREENS
     document.getElementById("wi").innerText = `${weatherdes}`;
     document.getElementById("date").innerText = `${date}`;
