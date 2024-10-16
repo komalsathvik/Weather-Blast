@@ -32,7 +32,7 @@ This project is a weather application built using **HTML**, **CSS**, and **JavaS
    - Sign up for an account on [OpenWeatherMap](https://openweathermap.org/api) and get an API key.
    - Sign up for an account on [GeoApify](https://www.geoapify.com/) to get an API key for geocoding.
 
-2. Add your API keys in the `index.js` file:
+2. Add your API keys in the `script.js` file:
    ```javascript
    const apiKey = 'your_openweathermap_api_key';  // OpenWeatherMap API key
    const geoAPI = 'your_geoapify_api_key'; // GeoApify API key
@@ -42,7 +42,7 @@ This project is a weather application built using **HTML**, **CSS**, and **JavaS
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/weather-app.git
+   git clone https://github.com/RAJIV81205/Weather-Info.git
    cd weather-app
    ```
 
