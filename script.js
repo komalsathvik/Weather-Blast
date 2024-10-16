@@ -142,7 +142,7 @@ function displayWeather(data) {
 }
 
 function fetchPollution(lat,lon){
-    const pollurl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const pollurl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     fetch(pollurl)
     .then(response=>response.json())
     .then(data=>{
