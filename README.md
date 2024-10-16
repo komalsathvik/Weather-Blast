@@ -2,6 +2,8 @@
 
 
 **Link:** https://weather-blast.netlify.app/
+
+
 This project is a weather application built using **HTML**, **CSS**, and **JavaScript**. It fetches real-time weather data from the **OpenWeatherMap API** and allows users to:
 - Search for weather by city name.
 - Fetch weather data based on the user's current geolocation.
