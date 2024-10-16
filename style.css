@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&family=Khula:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
 
 
 *{
@@ -14,7 +16,7 @@ body{
 }
 
 header{
-    width: 1072px;
+    width: 90%;
     height: 80px;
     background-color: rgba(106, 156, 137, 0.7);
     border: 2px solid rgba(22, 66, 60, 1);
@@ -23,7 +25,21 @@ header{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     align-items: center;
+    justify-content: center;
 
+}
+
+h1{
+    font-family: "Fira Code", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(22, 66, 60, 1);
+    font-size: 2.5em;
+    align-items: center;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1px;
+       
 }
 
 .up-container{
@@ -44,14 +60,18 @@ header{
 .card{
     display: flex;
     flex-direction: column;
-    height:350px;
-    width: 308px;
+    height:360px;
+    width: 330px;
     background-color: rgba(196, 218, 210, 1);
     border: 2px solid rgba(22, 66, 60, 1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 50px;
     justify-content: center;
     align-items: center;
+}
+#map{
+    height: 200px;
+    width:200px;
 }
 
 #city-input{
@@ -99,11 +119,10 @@ button{
 
 
 table {
-   
     width: 85%;
     border-collapse: collapse;
     margin-top: 40px;
-    overflow-x: auto;
+    overflow:scroll;
 }
 table, th, td {
     text-align: center;
@@ -112,6 +131,7 @@ table, th, td {
 th, td {
     padding: 10px;
     min-width: fit-content;
+    max-width: max-content;
     font-family: "Itim", cursive;
     font-weight: 400;
     font-style: normal;
@@ -119,3 +139,22 @@ th, td {
 th {
     background-color: #f2f2f2;
 }
+
+.small{
+    display: none;
+}
+
+@media screen and (max-width:1000px){
+    .big{
+        display: none;
+    }
+
+    .small{
+        display: inline-table;
+        width: 80%;
+        justify-content: center;
+        margin-bottom: 100px;
+    }
+    
+
+} 
