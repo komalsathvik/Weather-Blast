@@ -103,6 +103,7 @@ function displayWeather(data) {
     const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', opt);
     const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', opt);
 
+    //FOR BIG SCREENS
     document.getElementById("wi").innerText = `${weatherdes}`;
     document.getElementById("date").innerText = `${date}`;
     document.getElementById("city").innerText = `${city}`;
@@ -116,6 +117,26 @@ function displayWeather(data) {
     document.getElementById("ss").innerText = `${sunset}`;
     document.getElementById("cc").innerText = `${countryCode}`;
 
+    //FOR SMALL SCREENS
+    document.getElementById("wi1").innerText = `${weatherdes}`;
+    document.getElementById("date1").innerText = `${date}`;
+    document.getElementById("city1").innerText = `${city}`;
+    document.getElementById("temp1").innerText = `${currTemp}°C`;
+    document.getElementById("fl1").innerText = `${feelsLike}°C`;
+    document.getElementById("humi1").innerText = `${humidity}%`;
+    document.getElementById("press1").innerText = `${pressure} hPa`;
+    document.getElementById("visi1").innerText = `${visibility} Km`;
+    document.getElementById("ws1").innerText = `${windSpeed} m/s`;
+    document.getElementById("sr1").innerText = `${sunrise}`;
+    document.getElementById("ss1").innerText = `${sunset}`;
+    document.getElementById("cc1").innerText = `${countryCode}`;
+
     // Clear city input after displaying weather
     document.getElementById("city-input").value = '';
 }
+
+document.getElementById("id");
+var map = L.map('map', {
+    center: [51.505, -0.09],
+    zoom: 13
+});
