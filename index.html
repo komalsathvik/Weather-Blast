@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+
+    <div class="up-container">
+        <div class="card">
+            <p class="first">ENTER YOUR LOCATION</p>
+            <input type="text" id="city-input" placeholder="Enter city,State name or ZIP Code">
+            <button onclick="getWeatherByCity()">Search</button>
+            <p>OR</p>
+            <button onclick="getWeatherByLocation()" id="locate">Use Current Location</button>
+        </div>
+    
+        
+    </div>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Temperature</th>
+            <th>Feels Like</th>
+            <th>Humidity</th>
+            <th>Pressure</th>
+            <th>Visibility</th>
+            <th>Wind Speed</th>
+            <th>Sunrise</th>
+            <th>Sunset</th>
+            <th>Country Code</th>
+            <th>Weather Icon</th>
+        </tr>
+        <tr>
+            <td id="date">DD/MM/YY</td>
+            <td id="city">City</td>
+            <td id="temp">0°C</td>
+            <td id="fl">0°C</td>
+            <td id="humi">0 %</td>
+            <td id="press">0 atm</td>
+            <td id="visi">0 Km</td>
+            <td id="ws">0 m/s</td>
+            <td id="sr">00:00</td>
+            <td id="ss">00:00</td>
+            <td id="cc">IN</td>
+            <td id="wi"></td>
+        </tr>
+    </table>
+    <script src="script.js"></script>
+</body>
+
+</html>
