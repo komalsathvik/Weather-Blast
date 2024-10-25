@@ -44,6 +44,7 @@ function fetchWeatherByCity(cityName) {
         .then(data => {
             console.log('Weather data from OpenWeatherMap:', data);
             displayWeather(data);
+            initMap1(data);
         })
         .catch((error) => {
             console.error('Error fetching weather from OpenWeatherMap:', error);
@@ -83,7 +84,8 @@ function fetchWeatherByCoordinates(lat, lon) {
         .then(data => {
             console.log('Weather data from coordinates:', data);
             displayWeather(data);
-        
+            initMap1(data);
+
         })
         .catch(error => {
             console.error('Error fetching weather by coordinates:', error);
@@ -107,10 +109,11 @@ function displayWeather(data) {
     const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', opt);
     const lat = data.coord.lat;
     const lon = data.coord.lon;
-    fetchPollution(lat,lon);
+    fetchPollution(lat, lon);
+    
 
-    document.getElementById("weat").innerText =`Weather Information : ${city}`;
-    document.getElementById("air").innerText =`Air Pollution : ${city}`;
+    document.getElementById("weat").innerText = `Weather Information : ${city}`;
+    document.getElementById("air").innerText = `Air Pollution : ${city}`;
 
 
     //FOR BIG SCREENS
@@ -143,23 +146,24 @@ function displayWeather(data) {
 
     // Clear city input after displaying weather
     document.getElementById("city-input").value = '';
+
 }
 
-function fetchPollution(lat,lon){
+function fetchPollution(lat, lon) {
     const pollurl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     fetch(pollurl)
-    .then(response=>response.json())
-    .then(data=>{
-        console.log(data);
-        displayPollution(data);
-    })
-    .catch(error => {
-        console.error('Error fetching pollution info', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            displayPollution(data);
+        })
+        .catch(error => {
+            console.error('Error fetching pollution info', error);
+        });
 
 }
 
-function displayPollution(data){
+function displayPollution(data) {
     const aqi = data.list[0].main.aqi;
     const co = data.list[0].components.co;
     const no = data.list[0].components.no;
@@ -170,27 +174,27 @@ function displayPollution(data){
     const pm10 = data.list[0].components.pm10;
     const nh3 = data.list[0].components.nh3;
 
-    if (aqi===1){
+    if (aqi === 1) {
         document.getElementById("aqi").innerText = `Good`;
         document.getElementById("aqi1").innerText = `Good`;
     }
-    else if(aqi===2){
+    else if (aqi === 2) {
         document.getElementById("aqi").innerText = `Fair`;
         document.getElementById("aqi1").innerText = `Fair`;
     }
-    else if(aqi===3){
+    else if (aqi === 3) {
         document.getElementById("aqi").innerText = `Moderate`;
         document.getElementById("aqi1").innerText = `Moderate`;
     }
-    else if(aqi===4){
+    else if (aqi === 4) {
         document.getElementById("aqi").innerText = `Poor`;
         document.getElementById("aqi1").innerText = `Poor`;
     }
-    else{
+    else {
         document.getElementById("aqi").innerText = `Very Poor`;
         document.getElementById("aqi1").innerText = `Very Poor`;
     }
-    
+
 
     //FOR BIG SCREENS
     document.getElementById("co").innerText = `${co} μg/m3`;
@@ -211,4 +215,17 @@ function displayPollution(data){
     document.getElementById("pm2.51").innerText = `${pm2} μg/m3`;
     document.getElementById("pm101").innerText = `${pm10} μg/m3`;
     document.getElementById("nh31").innerText = `${nh3} μg/m3`;
-}    
+}
+
+
+var map = document.getElementById("map");
+function initMap1(data) {
+    const lat = data.coord.lat;
+    const lon = data.coord.lon;
+    map = new mappls.Map("map", {
+        center: [lat, lon]
+    });
+}
+
+
+
