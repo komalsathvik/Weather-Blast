@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://apis.mappls.com/advancedmaps/api/a9ba6e316849b4c62fe0c23d2ab10945/map_sdk?layer=vector&v=3.0&callback=initMap1" defer async></script>
 
 </head>
 
@@ -15,6 +16,7 @@
 
     </header>
 
+
     <div class="up-container">
         <div class="card">
             <p class="first">ENTER YOUR LOCATION</p>
@@ -22,6 +24,9 @@
             <button onclick="getWeatherByCity()">Search</button>
             <p>OR</p>
             <button onclick="getWeatherByLocation()" id="locate">Use Current Location</button>
+        </div>
+        <div class="map-container">
+            <div id="map"></div>
         </div>
 
 
@@ -177,6 +182,7 @@
             <td id="nh31">0.0 μg/m3</td>
         </tr>
     </table>
+    
     <script src="script.js"></script>
 </body>
 
