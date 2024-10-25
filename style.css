@@ -49,18 +49,36 @@ h2{
     font-weight: 500;
     font-style: normal;
     font-size: 1.5em;
-    text-align:center;
+    text-align: center;
 }
 
 .up-container{
     width: 90%;
-    height: 50%;
+    height: fit-content;
     display: flex;
     flex-direction: row;
-    margin-top: 40px;
+    flex-wrap: wrap;
+    margin: 50px 0;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 50px;
+
+}
+
+.map-container{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#map{
+    width: 350px;
+    height: 350px;
+    border: 2px solid rgba(22, 66, 60, 1);
+    border-radius: 25px;
+    box-shadow: 0 3px 6px gray;
 }
 
 .first{
@@ -79,11 +97,9 @@ h2{
     border-radius: 50px;
     justify-content: center;
     align-items: center;
+
 }
-#map{
-    height: 200px;
-    width:200px;
-}
+
 
 #city-input{
     padding-left: 10px;
@@ -157,6 +173,8 @@ th {
     display: none;
 }
 
+
+
 @media screen and (max-width:1000px){
     .big{
         display: none;
@@ -175,6 +193,24 @@ th {
     h2{
         text-decoration: underline;
     }
+
+   
+
     
 
 } 
+
+@media screen and (max-width:850px){
+    .up-container{
+        flex-direction: column;
+    }
+    #map{
+        height: 250px;
+        width: 250px;
+    }
+
+    .card{
+        margin-right: 0px;
+    }
+    
+}
