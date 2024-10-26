@@ -2,6 +2,90 @@ const apiKey = 'a9597b9143bd10ce791e1b80c44d2d50'; // OpenWeatherMap API key
 const geoAPI = '2783701aa79748f9b21e86f7ca361dd4'; // GeoApify API key
 const opt = { timeStyle: 'short', hour12: true }; // Time formatting options
 
+
+
+
+
+
+function autoComplete(){
+    const input = document.getElementById('city-input').value;
+    if (input.length <= 2){
+        document.getElementById("suggestion-box").style.display = "none";
+        return;
+    }
+    getSuggestion(input);
+    document.getElementById("suggestion-box").style.display = "flex";
+}
+
+
+function getSuggestion(input){
+    const suggestion0=document.getElementById("suggestion-0");
+    const suggestion1=document.getElementById("suggestion-1");
+    const suggestion2=document.getElementById("suggestion-2");
+    const suggestion3=document.getElementById("suggestion-3");
+    const suggestion4=document.getElementById("suggestion-4");
+
+
+    url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${geoAPI}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        suggestion0.innerText = [data.features[0].properties.address_line1 , data.features[0].properties.state , data.features[0].properties.country] ;
+        suggestion1.innerText = [data.features[1].properties.address_line1 , data.features[1].properties.state ,data.features[1].properties.country] ;
+        suggestion2.innerText = [data.features[2].properties.address_line1 , data.features[2].properties.state ,data.features[2].properties.country] ;
+        suggestion3.innerText = [data.features[3].properties.address_line1 , data.features[3].properties.state ,data.features[3].properties.country] ;
+        suggestion4.innerText = [data.features[4].properties.address_line1 , data.features[4].properties.state ,data.features[4].properties.country] ;
+
+        const suggest0 =[data.features[0].properties.address_line1 , data.features[0].properties.state];
+        const suggest1 =[data.features[1].properties.address_line1 , data.features[1].properties.state];
+        const suggest2 =[data.features[2].properties.address_line1 , data.features[2].properties.state];
+        const suggest3 =[data.features[3].properties.address_line1 , data.features[3].properties.state];
+        const suggest4 =[data.features[4].properties.address_line1 , data.features[4].properties.state];
+
+        inputSuggestion(suggest0,suggest1,suggest2,suggest3,suggest4);
+        
+    })
+    .catch(error => 
+        console.log('error', error));
+
+}
+
+function inputSuggestion(suggest0,suggest1,suggest2,suggest3,suggest4){
+    const suggestion0=document.getElementById("suggestion-0");
+    const suggestion1=document.getElementById("suggestion-1");
+    const suggestion2=document.getElementById("suggestion-2");
+    const suggestion3=document.getElementById("suggestion-3");
+    const suggestion4=document.getElementById("suggestion-4");
+
+    suggestion0.onclick = () => {
+        document.getElementById("city-input").value = suggest0; // Set input to selected city name
+        document.getElementById("suggestion-box").style.display = "none";
+    };
+    suggestion1.onclick = () => {
+        document.getElementById("city-input").value = suggest1; // Set input to selected city name
+        document.getElementById("suggestion-box").style.display = "none";
+    };
+    suggestion2.onclick = () => {
+        document.getElementById("city-input").value = suggest2; // Set input to selected city name
+        document.getElementById("suggestion-box").style.display = "none";
+    };
+    suggestion3.onclick = () => {
+        document.getElementById("city-input").value = suggest3; // Set input to selected city name
+        document.getElementById("suggestion-box").style.display = "none";
+    };
+    suggestion4.onclick = () => {
+        document.getElementById("city-input").value = suggest4; // Set input to selected city name
+        document.getElementById("suggestion-box").style.display = "none";
+    };
+    
+
+}
+
+
+
+
+
+
 // Fetch weather by city name
 function getWeatherByCity() {
     const cityName = document.getElementById("city-input").value;
@@ -21,6 +105,7 @@ function getWeatherByLocation() {
             const lon = position.coords.longitude;
             console.log(`Fetching weather data for current location: lat=${lat}, lon=${lon}`);
             fetchWeatherByCoordinates(lat, lon);
+            initMap1(position);
 
         }, () => {
             alert("Unable to retrieve your location.");
@@ -110,7 +195,7 @@ function displayWeather(data) {
     const lat = data.coord.lat;
     const lon = data.coord.lon;
     fetchPollution(lat, lon);
-    
+
 
     document.getElementById("weat").innerText = `Weather Information : ${city}`;
     document.getElementById("air").innerText = `Air Pollution : ${city}`;
