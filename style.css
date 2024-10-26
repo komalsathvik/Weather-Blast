@@ -214,10 +214,6 @@ th {
         margin-right: 0px;
     }
 
-    .suggestion-box{
-        height: 280px !important;
-        width: 300px !important;
-    }   
 
 }
 
@@ -225,8 +221,8 @@ th {
 
 .suggestion-box{
     position: absolute;
-    height: 190px;
-    width: 270px;
+    height: 200px;
+    width: 280px;
     background-color: #fff;
     border: 1px solid black;
     border-radius: 10px;
