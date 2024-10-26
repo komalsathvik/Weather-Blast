@@ -214,18 +214,20 @@ th {
         margin-right: 0px;
     }
 
-    #suggestion-box{
-        top:350px;
+    .suggestion-box{
+        height: 280px !important;
+        width: 300px !important;
     }   
 
     .suggestion{
-        font-size: 0.8rem;
+        overflow: hidden;
     }
+
 }
 
 
 
-#suggestion-box{
+.suggestion-box{
     position: absolute;
     height: 190px;
     width: 270px;
