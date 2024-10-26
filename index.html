@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://apis.mappls.com/advancedmaps/api/a9ba6e316849b4c62fe0c23d2ab10945/map_sdk?layer=vector&v=3.0&callback=initMap1" defer async></script>
+    <script src="https://apis.mappls.com/advancedmaps/api/a9ba6e316849b4c62fe0c23d2ab10945/map_sdk?layer=raster&v=3.0&callback=initMap1" defer async></script>
 
 </head>
 
@@ -20,7 +20,14 @@
     <div class="up-container">
         <div class="card">
             <p class="first">ENTER YOUR LOCATION</p>
-            <input type="text" id="city-input" placeholder="Enter city,State name or ZIP Code">
+            <input type="text" id="city-input" placeholder="Enter city,State name or ZIP Code" oninput="autoComplete()">
+            <div id="suggestion-box">
+                <div id="suggestion-0" class="suggestion"></div>
+                <div id="suggestion-1" class="suggestion"></div>
+                <div id="suggestion-2" class="suggestion"></div>
+                <div id="suggestion-3" class="suggestion"></div>
+                <div id="suggestion-4" class="suggestion"></div>
+            </div>
             <button onclick="getWeatherByCity()">Search</button>
             <p>OR</p>
             <button onclick="getWeatherByLocation()" id="locate">Use Current Location</button>
