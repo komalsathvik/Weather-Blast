@@ -214,15 +214,21 @@ th {
         margin-right: 0px;
     }
 
+    #suggestion-box{
+        height: 250px !important;
+        width: 320px !important;
+
+    }
+
 
 }
 
 
 
-.suggestion-box{
+#suggestion-box{
     position: absolute;
-    height: 200px;
-    width: 280px;
+    height: 190px;
+    width: 270px;
     background-color: #fff;
     border: 1px solid black;
     border-radius: 10px;
