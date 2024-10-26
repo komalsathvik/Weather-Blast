@@ -137,6 +137,7 @@ button{
     font-style: normal;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 0.5px;
+    cursor: pointer;
 }
 
 #locate{
@@ -205,12 +206,48 @@ th {
         flex-direction: column;
     }
     #map{
-        height: 250px;
-        width: 250px;
+        height: 280px;
+        width: 280px;
     }
 
     .card{
         margin-right: 0px;
     }
-    
+
+    #suggestion-box{
+        top:350px;
+    }   
+
+    .suggestion{
+        font-size: 0.8rem;
+    }
+}
+
+
+
+#suggestion-box{
+    position: absolute;
+    height: 190px;
+    width: 270px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 10px;
+    top: 330px;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.suggestion{
+    height: 20%;
+    color:rgba(22, 66, 60, 1);
+    width: 98%;
+    font-size: 1rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.5px solid black;
+    cursor: pointer;
 }
