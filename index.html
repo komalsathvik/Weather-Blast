@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://apis.mappls.com/advancedmaps/api/a9ba6e316849b4c62fe0c23d2ab10945/map_sdk?layer=raster&v=3.0&callback=initMap1" defer async></script>
-
+    <script
+        src="https://apis.mappls.com/advancedmaps/api/a9ba6e316849b4c62fe0c23d2ab10945/map_sdk?layer=raster&v=3.0&callback=initMap1"
+        defer async></script>
 </head>
 
 <body>
@@ -124,6 +125,12 @@
 
 
     </table>
+
+    <h2 id="forecast">Weather Forecast</h2>
+    <div class="forecasttable">
+        <table id="forecast-table">
+        </table>
+    </div>
     <h2 id="air">Air Pollution</h2>
 
     <table class="big">
@@ -189,8 +196,11 @@
             <td id="nh31">0.0 μg/m3</td>
         </tr>
     </table>
-    
+
+
+
     <script src="script.js"></script>
+
 </body>
 
 </html>
