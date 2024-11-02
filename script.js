@@ -5,6 +5,14 @@ const opt = { timeStyle: 'short', hour12: true }; // Time formatting options
 
 
 
+function initMap() {
+    map = new mappls.Map("map", {
+        center: [28.6138954, 77.2090057]
+    });
+}
+
+initMap();
+
 
 
 function autoComplete(){
@@ -303,7 +311,9 @@ function displayPollution(data) {
 }
 
 
-var map = document.getElementById("map");
+let map=document.getElementById("map");
+
+
 function initMap1(data) {
     const lat = data.coord.lat;
     const lon = data.coord.lon;
