@@ -206,8 +206,8 @@ th {
         flex-direction: column;
     }
     #map{
-        height: 280px;
-        width: 280px;
+        height: 300px;
+        width: 300px;
     }
 
     .card{
@@ -251,4 +251,20 @@ th {
     align-items: center;
     border-bottom: 0.5px solid black;
     cursor: pointer;
+}
+
+.forecasttable{
+    width: 90%;
+    overflow-x: scroll;
+    
+}
+
+.forecasttable th{
+text-wrap: nowrap;
+color: black;
+
+}
+
+.forecasttable::-webkit-scrollbar{
+    display: none;
 }
