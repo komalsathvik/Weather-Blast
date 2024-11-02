@@ -3,21 +3,20 @@ const geoAPI = '2783701aa79748f9b21e86f7ca361dd4'; // GeoApify API key
 const opt = { timeStyle: 'short', hour12: true }; // Time formatting options
 
 
-
-
 function initMap() {
     map = new mappls.Map("map", {
         center: [28.6138954, 77.2090057]
     });
 }
 
-initMap();
+window.onload = initMap();
 
 
 
-function autoComplete(){
+
+function autoComplete() {
     const input = document.getElementById('city-input').value;
-    if (input.length <= 2){
+    if (input.length <= 2) {
         document.getElementById("suggestion-box").style.display = "none";
         return;
     }
@@ -26,66 +25,75 @@ function autoComplete(){
 }
 
 
-function getSuggestion(input){
-    const suggestion0=document.getElementById("suggestion-0");
-    const suggestion1=document.getElementById("suggestion-1");
-    const suggestion2=document.getElementById("suggestion-2");
-    const suggestion3=document.getElementById("suggestion-3");
-    const suggestion4=document.getElementById("suggestion-4");
+function getSuggestion(input) {
+    const suggestion0 = document.getElementById("suggestion-0");
+    const suggestion1 = document.getElementById("suggestion-1");
+    const suggestion2 = document.getElementById("suggestion-2");
+    const suggestion3 = document.getElementById("suggestion-3");
+    const suggestion4 = document.getElementById("suggestion-4");
 
 
     url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${geoAPI}`;
     fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        suggestion0.innerText = [data.features[0].properties.address_line1 , data.features[0].properties.state , data.features[0].properties.country] ;
-        suggestion1.innerText = [data.features[1].properties.address_line1 , data.features[1].properties.state ,data.features[1].properties.country] ;
-        suggestion2.innerText = [data.features[2].properties.address_line1 , data.features[2].properties.state ,data.features[2].properties.country] ;
-        suggestion3.innerText = [data.features[3].properties.address_line1 , data.features[3].properties.state ,data.features[3].properties.country] ;
-        suggestion4.innerText = [data.features[4].properties.address_line1 , data.features[4].properties.state ,data.features[4].properties.country] ;
+        .then(response => response.json())
+        .then(data => {
+            suggestion0.innerText = [data.features[0].properties.address_line1, data.features[0].properties.state, data.features[0].properties.country];
+            suggestion1.innerText = [data.features[1].properties.address_line1, data.features[1].properties.state, data.features[1].properties.country];
+            suggestion2.innerText = [data.features[2].properties.address_line1, data.features[2].properties.state, data.features[2].properties.country];
+            suggestion3.innerText = [data.features[3].properties.address_line1, data.features[3].properties.state, data.features[3].properties.country];
+            suggestion4.innerText = [data.features[4].properties.address_line1, data.features[4].properties.state, data.features[4].properties.country];
 
-        const suggest0 =[data.features[0].properties.address_line1 , data.features[0].properties.state];
-        const suggest1 =[data.features[1].properties.address_line1 , data.features[1].properties.state];
-        const suggest2 =[data.features[2].properties.address_line1 , data.features[2].properties.state];
-        const suggest3 =[data.features[3].properties.address_line1 , data.features[3].properties.state];
-        const suggest4 =[data.features[4].properties.address_line1 , data.features[4].properties.state];
+            const suggest0 = [data.features[0].properties.address_line1, data.features[0].properties.state];
+            const suggest1 = [data.features[1].properties.address_line1, data.features[1].properties.state];
+            const suggest2 = [data.features[2].properties.address_line1, data.features[2].properties.state];
+            const suggest3 = [data.features[3].properties.address_line1, data.features[3].properties.state];
+            const suggest4 = [data.features[4].properties.address_line1, data.features[4].properties.state];
 
-        inputSuggestion(suggest0,suggest1,suggest2,suggest3,suggest4);
-        
-    })
-    .catch(error => 
-        console.log('error', error));
+            inputSuggestion(suggest0, suggest1, suggest2, suggest3, suggest4);
+
+        })
+        .catch(error =>
+            console.log('error', error));
 
 }
 
-function inputSuggestion(suggest0,suggest1,suggest2,suggest3,suggest4){
-    const suggestion0=document.getElementById("suggestion-0");
-    const suggestion1=document.getElementById("suggestion-1");
-    const suggestion2=document.getElementById("suggestion-2");
-    const suggestion3=document.getElementById("suggestion-3");
-    const suggestion4=document.getElementById("suggestion-4");
+function inputSuggestion(suggest0, suggest1, suggest2, suggest3, suggest4) {
+    const suggestion0 = document.getElementById("suggestion-0");
+    const suggestion1 = document.getElementById("suggestion-1");
+    const suggestion2 = document.getElementById("suggestion-2");
+    const suggestion3 = document.getElementById("suggestion-3");
+    const suggestion4 = document.getElementById("suggestion-4");
 
     suggestion0.onclick = () => {
         document.getElementById("city-input").value = suggest0; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
+        
     };
     suggestion1.onclick = () => {
         document.getElementById("city-input").value = suggest1; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
+        
+
     };
     suggestion2.onclick = () => {
         document.getElementById("city-input").value = suggest2; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
+        
+
     };
     suggestion3.onclick = () => {
         document.getElementById("city-input").value = suggest3; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
+        
+
     };
     suggestion4.onclick = () => {
         document.getElementById("city-input").value = suggest4; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
+        
+
     };
-    
+
 
 }
 
@@ -203,6 +211,7 @@ function displayWeather(data) {
     const lat = data.coord.lat;
     const lon = data.coord.lon;
     fetchPollution(lat, lon);
+    getWeatherForecast(lat,lon);
 
 
     document.getElementById("weat").innerText = `Weather Information : ${city}`;
@@ -311,7 +320,7 @@ function displayPollution(data) {
 }
 
 
-let map=document.getElementById("map");
+let map = document.getElementById("map");
 
 
 function initMap1(data) {
@@ -323,4 +332,71 @@ function initMap1(data) {
 }
 
 
+function getWeatherForecast(lat,lon){
+    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily&appid=${apiKey}&units=metric`)
+    .then(response => response.json())
+    .then(data => 
+        {console.log(data);
+        showWeatherForecast(data);
+
+    })
+
+    .catch(error => {
+        console.error('Error fetching Forecast', error);
+    });
+}
+
+function showWeatherForecast(data) {
+    document.getElementById("forecast-table").innerHTML=`
+    <tr>
+    <th>${new Date(data.hourly[0].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[1].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[2].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[3].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[4].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[5].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[6].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[7].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[8].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[9].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[10].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[11].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[12].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[13].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[14].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[15].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[16].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[17].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[18].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[19].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>${new Date(data.hourly[20].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    </tr>
+    <tr>
+    <td>${data.hourly[0].temp}°C </td>
+    <td>${data.hourly[1].temp}°C</td>
+    <td>${data.hourly[2].temp}°C</td>
+    <td>${data.hourly[3].temp}°C</td>
+    <td>${data.hourly[4].temp}°C</td>
+    <td>${data.hourly[5].temp}°C</td>
+    <td>${data.hourly[6].temp}°C</td>
+    <td>${data.hourly[7].temp}°C</td>
+    <td>${data.hourly[8].temp}°C</td>
+    <td>${data.hourly[9].temp}°C</td>
+    <td>${data.hourly[10].temp}°C</td>
+    <td>${data.hourly[11].temp}°C</td>
+    <td>${data.hourly[12].temp}°C</td>
+    <td>${data.hourly[13].temp}°C</td>
+    <td>${data.hourly[14].temp}°C</td>
+    <td>${data.hourly[15].temp}°C</td>
+    <td>${data.hourly[16].temp}°C</td>
+    <td>${data.hourly[17].temp}°C</td>
+    <td>${data.hourly[18].temp}°C</td>
+    <td>${data.hourly[19].temp}°C</td>
+    <td>${data.hourly[20].temp}°C</td>
+
+
+
+    `
+    
+}
 
