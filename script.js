@@ -14,6 +14,18 @@ window.onload = initMap();
 
 
 
+function initMap1(data) {
+    const latitude = data.coord.lat;
+    const longitude = data.coord.lon;
+    map = new mappls.Map("map", {
+        center: [latitude, longitude]
+    });
+}
+
+
+
+
+
 function autoComplete() {
     const input = document.getElementById('city-input').value;
     if (input.length <= 2) {
@@ -67,30 +79,30 @@ function inputSuggestion(suggest0, suggest1, suggest2, suggest3, suggest4) {
     suggestion0.onclick = () => {
         document.getElementById("city-input").value = suggest0; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
-        
+
     };
     suggestion1.onclick = () => {
         document.getElementById("city-input").value = suggest1; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
-        
+
 
     };
     suggestion2.onclick = () => {
         document.getElementById("city-input").value = suggest2; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
-        
+
 
     };
     suggestion3.onclick = () => {
         document.getElementById("city-input").value = suggest3; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
-        
+
 
     };
     suggestion4.onclick = () => {
         document.getElementById("city-input").value = suggest4; // Set input to selected city name
         document.getElementById("suggestion-box").style.display = "none";
-        
+
 
     };
 
@@ -145,7 +157,7 @@ function fetchWeatherByCity(cityName) {
         .then(data => {
             console.log('Weather data from OpenWeatherMap:', data);
             displayWeather(data);
-            initMap1(data);
+
         })
         .catch((error) => {
             console.error('Error fetching weather from OpenWeatherMap:', error);
@@ -211,7 +223,8 @@ function displayWeather(data) {
     const lat = data.coord.lat;
     const lon = data.coord.lon;
     fetchPollution(lat, lon);
-    getWeatherForecast(lat,lon);
+    getWeatherForecast(lat, lon);
+
 
 
     document.getElementById("weat").innerText = `Weather Information : ${city}`;
@@ -248,6 +261,7 @@ function displayWeather(data) {
 
     // Clear city input after displaying weather
     document.getElementById("city-input").value = '';
+    initMap1(data);
 
 }
 
@@ -320,34 +334,24 @@ function displayPollution(data) {
 }
 
 
-let map = document.getElementById("map");
 
 
-function initMap1(data) {
-    const lat = data.coord.lat;
-    const lon = data.coord.lon;
-    map = new mappls.Map("map", {
-        center: [lat, lon]
-    });
-}
-
-
-function getWeatherForecast(lat,lon){
+function getWeatherForecast(lat, lon) {
     fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily&appid=${apiKey}&units=metric`)
-    .then(response => response.json())
-    .then(data => 
-        {console.log(data);
-        showWeatherForecast(data);
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showWeatherForecast(data);
 
-    })
+        })
 
-    .catch(error => {
-        console.error('Error fetching Forecast', error);
-    });
+        .catch(error => {
+            console.error('Error fetching Forecast', error);
+        });
 }
 
 function showWeatherForecast(data) {
-    document.getElementById("forecast-table").innerHTML=`
+    document.getElementById("forecast-table").innerHTML = `
     <tr>
     <th>${new Date(data.hourly[0].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
     <th>${new Date(data.hourly[1].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
@@ -393,10 +397,38 @@ function showWeatherForecast(data) {
     <td>${data.hourly[18].temp}°C</td>
     <td>${data.hourly[19].temp}°C</td>
     <td>${data.hourly[20].temp}°C</td>
+    </tr>
+    <tr>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[0].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[1].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[2].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[3].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[4].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[5].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[6].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[7].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[8].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[9].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[10].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[11].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[12].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[13].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[14].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[15].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[16].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[17].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[18].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[19].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.hourly[20].weather[0].icon}@2x.png"></td>
+    
+    
+    </tr>
+
+
 
 
 
     `
-    
+
 }
 
