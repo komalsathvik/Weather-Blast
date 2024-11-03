@@ -337,7 +337,7 @@ function displayPollution(data) {
 
 
 function getWeatherForecast(lat, lon) {
-    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily&appid=${apiKey}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${apiKey}&units=metric`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -351,84 +351,94 @@ function getWeatherForecast(lat, lon) {
 }
 
 function showWeatherForecast(data) {
+    document.getElementById("forecast").style.display="block";
+    const data0 = new Date(data.daily[0].dt * 1000);
+    const data1 = new Date(data.daily[1].dt * 1000);
+    const data2 = new Date(data.daily[2].dt * 1000);
+    const data3 = new Date(data.daily[3].dt * 1000);
+    const data4 = new Date(data.daily[4].dt * 1000);
+    const data5 = new Date(data.daily[5].dt * 1000);
+    const data6 = new Date(data.daily[6].dt * 1000);
+    const data7 = new Date(data.daily[7].dt * 1000);
+
     document.getElementById("forecast-table").innerHTML = `
     <tr>
-    <th>${new Date(data.hourly[0].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[1].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[2].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[3].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[4].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[5].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[6].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[7].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[8].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[9].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[10].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[11].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[12].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[13].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[14].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[15].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[16].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[17].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[18].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[19].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
-    <th>${new Date(data.hourly[20].dt * 1000).toLocaleTimeString('en-US', opt)}</th>
+    <th>Date</th>
+    <th>${data0.toLocaleDateString()}</th>
+    <th>${data1.toLocaleDateString()}</th>
+    <th>${data2.toLocaleDateString()}</th>
+    <th>${data3.toLocaleDateString()}</th>
+    <th>${data4.toLocaleDateString()}</th>
+    <th>${data5.toLocaleDateString()}</th>
+    <th>${data6.toLocaleDateString()}</th>
+    <th>${data7.toLocaleDateString()}</th>
     </tr>
     <tr>
-    <td>${data.hourly[0].temp}°C </td>
-    <td>${data.hourly[1].temp}°C</td>
-    <td>${data.hourly[2].temp}°C</td>
-    <td>${data.hourly[3].temp}°C</td>
-    <td>${data.hourly[4].temp}°C</td>
-    <td>${data.hourly[5].temp}°C</td>
-    <td>${data.hourly[6].temp}°C</td>
-    <td>${data.hourly[7].temp}°C</td>
-    <td>${data.hourly[8].temp}°C</td>
-    <td>${data.hourly[9].temp}°C</td>
-    <td>${data.hourly[10].temp}°C</td>
-    <td>${data.hourly[11].temp}°C</td>
-    <td>${data.hourly[12].temp}°C</td>
-    <td>${data.hourly[13].temp}°C</td>
-    <td>${data.hourly[14].temp}°C</td>
-    <td>${data.hourly[15].temp}°C</td>
-    <td>${data.hourly[16].temp}°C</td>
-    <td>${data.hourly[17].temp}°C</td>
-    <td>${data.hourly[18].temp}°C</td>
-    <td>${data.hourly[19].temp}°C</td>
-    <td>${data.hourly[20].temp}°C</td>
+    <th>Max-Temperature</th>
+    <td>${data.daily[0].temp.max} °C </td>
+    <td>${data.daily[1].temp.max} °C</td>
+    <td>${data.daily[2].temp.max} °C</td>
+    <td>${data.daily[3].temp.max} °C</td>
+    <td>${data.daily[4].temp.max} °C</td>
+    <td>${data.daily[5].temp.max} °C</td>
+    <td>${data.daily[6].temp.max} °C</td>
+    <td>${data.daily[7].temp.max} °C</td>
     </tr>
     <tr>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[0].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[1].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[2].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[3].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[4].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[5].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[6].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[7].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[8].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[9].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[10].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[11].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[12].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[13].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[14].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[15].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[16].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[17].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[18].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[19].weather[0].icon}@2x.png"></td>
-    <td><img src="https://openweathermap.org/img/wn/${data.hourly[20].weather[0].icon}@2x.png"></td>
-    
-    
+    <th>Min-Temperature</th>
+    <td>${data.daily[0].temp.min} °C </td>
+    <td>${data.daily[1].temp.min} °C</td>
+    <td>${data.daily[2].temp.min} °C</td>
+    <td>${data.daily[3].temp.min} °C</td>
+    <td>${data.daily[4].temp.min} °C</td>
+    <td>${data.daily[5].temp.min} °C</td>
+    <td>${data.daily[6].temp.min} °C</td>
+    <td>${data.daily[7].temp.min} °C</td>
     </tr>
-
-
-
-
-
-    `
+    <tr>
+    <th>Sunrise</th>
+    <td>${new Date(data.daily[0].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[1].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[2].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[3].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[4].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[5].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[6].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[7].sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>
+    </tr>
+    <tr>
+    <th>Sunset</th>
+    <td>${new Date(data.daily[0].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[1].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[2].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[3].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[4].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[5].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[6].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    <td>${new Date(data.daily[7].sunset * 1000).toLocaleTimeString('en-US', opt)}</td>
+    </tr>
+    <tr>
+    <th>Summary</th>
+    <td>${data.daily[0].summary}</td>
+    <td>${data.daily[1].summary}</td>
+    <td>${data.daily[2].summary}</td>
+    <td>${data.daily[3].summary}</td>
+    <td>${data.daily[4].summary}</td>
+    <td>${data.daily[5].summary}</td>
+    <td>${data.daily[6].summary}</td>
+    <td>${data.daily[7].summary}</td>
+    </tr>
+    <tr>
+    <th>Icon</th>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[0].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[1].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[2].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[3].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[4].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[5].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[6].weather[0].icon}@2x.png"></td>
+    <td><img src="https://openweathermap.org/img/wn/${data.daily[7].weather[0].icon}@2x.png"></td>
+    </tr>`
 
 }
 
