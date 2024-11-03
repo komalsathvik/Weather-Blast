@@ -253,10 +253,19 @@ th {
     cursor: pointer;
 }
 
+#forecast{
+    display: none;
+
+}
+
 .forecasttable{
     width: 90%;
     overflow-x: scroll;
     
+}
+
+.forecasttable table{
+    width: 100%;
 }
 
 .forecasttable th{
@@ -264,6 +273,10 @@ text-wrap: nowrap;
 color: black;
 background-color: rgb(104, 239, 151);
 
+}
+
+.forecasttable tr:nth-of-type(7){
+    background-color: rgb(208, 255, 218);
 }
 
 .forecasttable::-webkit-scrollbar{
