@@ -262,6 +262,7 @@ th {
 .forecasttable th{
 text-wrap: nowrap;
 color: black;
+background-color: rgb(104, 239, 151);
 
 }
 
