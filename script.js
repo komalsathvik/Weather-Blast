@@ -36,77 +36,34 @@ function autoComplete() {
     document.getElementById("suggestion-box").style.display = "flex";
 }
 
-
 function getSuggestion(input) {
-    const suggestion0 = document.getElementById("suggestion-0");
-    const suggestion1 = document.getElementById("suggestion-1");
-    const suggestion2 = document.getElementById("suggestion-2");
-    const suggestion3 = document.getElementById("suggestion-3");
-    const suggestion4 = document.getElementById("suggestion-4");
-
-
-    url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${geoAPI}`;
+    const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${input}&apiKey=${geoAPI}`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            suggestion0.innerText = [data.features[0].properties.address_line1, data.features[0].properties.state, data.features[0].properties.country];
-            suggestion1.innerText = [data.features[1].properties.address_line1, data.features[1].properties.state, data.features[1].properties.country];
-            suggestion2.innerText = [data.features[2].properties.address_line1, data.features[2].properties.state, data.features[2].properties.country];
-            suggestion3.innerText = [data.features[3].properties.address_line1, data.features[3].properties.state, data.features[3].properties.country];
-            suggestion4.innerText = [data.features[4].properties.address_line1, data.features[4].properties.state, data.features[4].properties.country];
+            const suggestions = data.features.slice(0, 5).map(feature => ({
+                address: feature.properties.address_line1,
+                state: feature.properties.state,
+                country: feature.properties.country,
+            }));
 
-            const suggest0 = [data.features[0].properties.address_line1, data.features[0].properties.state];
-            const suggest1 = [data.features[1].properties.address_line1, data.features[1].properties.state];
-            const suggest2 = [data.features[2].properties.address_line1, data.features[2].properties.state];
-            const suggest3 = [data.features[3].properties.address_line1, data.features[3].properties.state];
-            const suggest4 = [data.features[4].properties.address_line1, data.features[4].properties.state];
-
-            inputSuggestion(suggest0, suggest1, suggest2, suggest3, suggest4);
-
+            updateSuggestions(suggestions);
         })
-        .catch(error =>
-            console.log('error', error));
-
+        .catch(error => console.log('error', error));
 }
 
-function inputSuggestion(suggest0, suggest1, suggest2, suggest3, suggest4) {
-    const suggestion0 = document.getElementById("suggestion-0");
-    const suggestion1 = document.getElementById("suggestion-1");
-    const suggestion2 = document.getElementById("suggestion-2");
-    const suggestion3 = document.getElementById("suggestion-3");
-    const suggestion4 = document.getElementById("suggestion-4");
-
-    suggestion0.onclick = () => {
-        document.getElementById("city-input").value = suggest0; // Set input to selected city name
-        document.getElementById("suggestion-box").style.display = "none";
-
-    };
-    suggestion1.onclick = () => {
-        document.getElementById("city-input").value = suggest1; // Set input to selected city name
-        document.getElementById("suggestion-box").style.display = "none";
-
-
-    };
-    suggestion2.onclick = () => {
-        document.getElementById("city-input").value = suggest2; // Set input to selected city name
-        document.getElementById("suggestion-box").style.display = "none";
-
-
-    };
-    suggestion3.onclick = () => {
-        document.getElementById("city-input").value = suggest3; // Set input to selected city name
-        document.getElementById("suggestion-box").style.display = "none";
-
-
-    };
-    suggestion4.onclick = () => {
-        document.getElementById("city-input").value = suggest4; // Set input to selected city name
-        document.getElementById("suggestion-box").style.display = "none";
-
-
-    };
-
-
+function updateSuggestions(suggestions) {
+    const suggestionBox = document.getElementById("suggestion-box");
+    suggestions.forEach((suggestion, index) => {
+        const suggestionElement = document.getElementById(`suggestion-${index}`);
+        if (suggestionElement) {
+            suggestionElement.innerText = `${suggestion.address}, ${suggestion.state}, ${suggestion.country}`;
+            suggestionElement.onclick = () => {
+                document.getElementById("city-input").value = `${suggestion.address}, ${suggestion.state}`;
+                suggestionBox.style.display = "none";
+            };
+        }
+    });
 }
 
 
