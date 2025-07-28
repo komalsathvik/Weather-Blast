@@ -1,73 +1,178 @@
+# 🌦️ Weather Blast - Weather App with Air Pollution Insights 🌫️
 
-# 🌦️ Weather App with Air Pollution Insights 🌫️
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![GSSoC](https://img.shields.io/badge/GSSoC-2025-blue)](https://gssoc.girlscript.tech/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6b263274-fa27-4813-9e3d-3dbb4f005abf/deploy-status)](https://app.netlify.com/sites/weather-blast/deploys)
 
-**Link:** [Weather Blast](https://weather-blast.netlify.app/)
+**🚀 Live Demo:** [Weather Blast](https://weather-blast.netlify.app/)
 
-This project is a comprehensive weather application built with **HTML**, **CSS**, and **JavaScript**. It fetches real-time weather data and air quality information, enhancing users’ awareness of both weather and pollution conditions.
+This project is a comprehensive weather application built with **HTML**, **CSS**, and **JavaScript**. It fetches real-time weather data and air quality information, enhancing users' awareness of both weather and pollution conditions.
+
+## 🎯 About GSSoC
+
+This project is part of **GirlScript Summer of Code (GSSoC) 2024**! We welcome contributions from developers of all skill levels. Whether you're a beginner looking to make your first open source contribution or an experienced developer, there's something for everyone.
+
+## 📋 Rules for Pull Requests
+
+Before contributing, please follow these guidelines:
+
+### ⭐ Getting Started
+1. **Star this repository** ⭐ (it shows your appreciation for the project)
+2. **Fork this repository** to your GitHub account
+3. **Clone your forked repository** to your local machine
+4. **Create a new branch** for your feature/fix
+
+### 📝 Pull Request Guidelines
+1. **Describe the issue properly** - Provide a clear and detailed description of what the PR addresses
+2. **Reference the issue number** - Link your PR to the relevant issue using `Fixes #issue_number`
+3. **Follow the existing code style** - Maintain consistency with the current codebase
+4. **Test your changes** - Ensure your code works as expected before submitting
+5. **Add meaningful commit messages** - Use descriptive commit messages that explain what changes were made
+6. **Update documentation** - If you add new features, update the README accordingly
+7. **One feature per PR** - Keep your pull requests focused on a single feature or bug fix
+8. **Be respectful** - Follow our Code of Conduct and be respectful to other contributors
+
+### 🚫 What NOT to do
+- Don't submit PRs without linking them to an issue
+- Don't make changes unrelated to the issue you're solving
+- Don't submit duplicate PRs
+- Don't spam or create low-quality PRs just for the sake of contributing
+
+## 🤝 How to Contribute
+
+### For Beginners
+If you're new to open source, start with these types of contributions:
+- 📚 Improve documentation
+- 🐛 Report bugs
+- 🎨 Enhance UI/UX
+- ✅ Add input validation
+- 🧪 Write tests
+
+### For Experienced Developers
+- 🚀 Add new features
+- ⚡ Optimize performance
+- 🔒 Improve security
+- 📱 Make the app responsive
+- 🌐 Add internationalization
 
 ## 🌐 Features
 
-- 🌍 **Search by City Name**: Users can enter a city name to retrieve current weather and air quality for that location.
-- 📍 **Geolocation Support**: Fetch weather and pollution details based on the user's location using the browser’s geolocation.
-- 🔄 **Fallback to GeoApify**: Uses GeoApify’s geocoding service for latitude and longitude if the city name is not found on OpenWeatherMap.
-- 🌞 **Weather Details**: Get real-time data on temperature, weather conditions, humidity, pressure, visibility, wind speed, sunrise, and sunset times.
-- 🌫️ **Air Pollution Data**: Stay informed about air quality with pollution level indicators (such as PM2.5, PM10, and AQI).
+- 🌍 **Search by City Name**: Users can enter a city name to retrieve current weather and air quality for that location
+- 📍 **Geolocation Support**: Fetch weather and pollution details based on the user's location using the browser's geolocation
+- 🔄 **Fallback to GeoApify**: Uses GeoApify's geocoding service for latitude and longitude if the city name is not found on OpenWeatherMap
+- 🌞 **Weather Details**: Get real-time data on temperature, weather conditions, humidity, pressure, visibility, wind speed, sunrise, and sunset times
+- 🌫️ **Air Pollution Data**: Stay informed about air quality with pollution level indicators (such as PM2.5, PM10, and AQI)
 
 ## 🛠️ Technologies Used
 
-- **HTML**: For structuring the application.
-- **CSS**: Basic styling.
-- **JavaScript**: Logic to fetch and display data.
-- **OpenWeatherMap API**: For retrieving weather and air pollution data based on city name or geographic coordinates.
-- **GeoApify API**: Used as a fallback to fetch latitude and longitude if the city isn’t found in OpenWeatherMap.
+- **HTML**: For structuring the application
+- **CSS**: Basic styling
+- **JavaScript**: Logic to fetch and display data
+- **OpenWeatherMap API**: For retrieving weather and air pollution data based on city name or geographic coordinates
+- **GeoApify API**: Used as a fallback to fetch latitude and longitude if the city isn't found in OpenWeatherMap
 
-## 🚀 Running the Project
+## 🚀 Getting Started
 
 ### Prerequisites
-
 1. **API Keys**:
-   - [OpenWeatherMap API](https://openweathermap.org/api): For weather and air quality data.
-   - [GeoApify API](https://www.geoapify.com/): For geocoding services.
+   - [OpenWeatherMap API](https://openweathermap.org/api): For weather and air quality data
+   - [GeoApify API](https://www.geoapify.com/): For geocoding services
 
-2. Add your API keys to the `script.js` file:
+### Installation Steps
+1. **Fork and Clone**
+   ```bash
+   git clone https://github.com/RAJIV81205/Weather-Blast.git
+   cd Weather-Blast
+   ```
+
+2. **Add your API keys** to the `script.js` file:
    ```javascript
    const apiKey = 'your_openweathermap_api_key';  // OpenWeatherMap API key
    const geoAPI = 'your_geoapify_api_key'; // GeoApify API key
    ```
 
-## 📂 File Structure
+3. **Open `index.html`** in your browser to run the application locally
 
+## 📂 File Structure
 ```plaintext
-weather-app/
+Weather-Blast/
 │
 ├── index.html       # Main HTML structure
 ├── style.css        # Styling for the application
 ├── script.js        # JavaScript for fetching and displaying data
-└── README.md        # Project documentation
+├── README.md        # Project documentation
+├── LICENSE          # MIT License file
+└── CONTRIBUTING.md  # Contribution guidelines (to be added)
 ```
 
 ## 🔧 Key JavaScript Functions
 
-- **`getWeatherByCity()`**: Fetches weather and air pollution data for a given city.
-- **`getWeatherByLocation()`**: Gets the user’s geolocation for weather and air quality data.
-- **`fetchLatLon()`**: Fetches coordinates from GeoApify if the city isn’t found.
-- **`fetchWeatherByCoordinates()`**: Fetches weather data using latitude and longitude.
-- **`fetchAirQuality()`**: Retrieves air quality data based on geographic coordinates.
-- **`displayWeather()`**: Displays weather information.
-- **`displayAirQuality()`**: Shows air pollution details like AQI, PM2.5, and PM10 levels.
+- **`getWeatherByCity()`**: Fetches weather and air pollution data for a given city
+- **`getWeatherByLocation()`**: Gets the user's geolocation for weather and air quality data
+- **`fetchLatLon()`**: Fetches coordinates from GeoApify if the city isn't found
+- **`fetchWeatherByCoordinates()`**: Fetches weather data using latitude and longitude
+- **`fetchAirQuality()`**: Retrieves air quality data based on geographic coordinates
+- **`displayWeather()`**: Displays weather information
+- **`displayAirQuality()`**: Shows air pollution details like AQI, PM2.5, and PM10 levels
 
 ## 🧰 Error Handling
 
-- **GeoApify Fallback**: If OpenWeatherMap does not recognize the city name, GeoApify fetches latitude and longitude.
-- **Geolocation Access Denied**: Notifies users if location access is restricted.
+- **GeoApify Fallback**: If OpenWeatherMap does not recognize the city name, GeoApify fetches latitude and longitude
+- **Geolocation Access Denied**: Notifies users if location access is restricted
 
-## 🌟 Future Enhancements
+## 🌟 Future Enhancements & Open Issues
 
-- Add more detailed pollution levels for various pollutants.
-- Implement a 5-day weather and pollution forecast.
-- Enhance the user interface with weather and pollution icons.
-- Provide more descriptive error messages for various API issues.
+Help us improve Weather Blast by working on these features:
+
+- [ ] Add more detailed pollution levels for various pollutants
+- [ ] Implement a 5-day weather and pollution forecast
+- [ ] Enhance the user interface with weather and pollution icons
+- [ ] Provide more descriptive error messages for various API issues
+- [ ] Add dark/light theme toggle
+- [ ] Implement offline caching for recent searches
+- [ ] Add weather alerts and notifications
+- [ ] Create mobile-responsive design
+- [ ] Add unit tests
+- [ ] Implement search history feature
+
+## 🏆 Contributors
+
+We appreciate all the contributors who have helped make this project better!
+
+<!-- Contributors list will be automatically updated -->
+<a href="https://github.com/RAJIV81205/Weather-Blast/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=RAJIV81205/Weather-Blast" />
+</a>
+
+## 📊 Project Stats
+
+![GitHub stars](https://img.shields.io/github/stars/RAJIV81205/Weather-Blast?style=social)
+![GitHub forks](https://img.shields.io/github/forks/RAJIV81205/Weather-Blast?style=social)
+![GitHub issues](https://img.shields.io/github/issues/RAJIV81205/Weather-Blast)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/RAJIV81205/Weather-Blast)
+
+## 🤝 Code of Conduct
+
+Please note that this project is released with a [Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+## 💬 Community & Support
+
+- **Questions?** Open an issue with the `question` label
+- **Bug Reports:** Use the `bug` label when creating issues
+- **Feature Requests:** Use the `enhancement` label
+- **Discussion:** Join our community discussions in the Issues section
 
 ## 📜 License
 
-This project is open-source and available under the [MIT License](LICENSE). 
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+### 🌟 Show your support
+
+Give a ⭐ if you found this project helpful!
+
+**Happy Contributing! 🎉**
+
+Made with ❤️ for GSSoC 2024
