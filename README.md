@@ -160,4 +160,4 @@ Give a ⭐ if you found this project helpful!
 
 **Happy Contributing! 🎉**
 
-Made with ❤️ for GSSoC 2024
+Made with ❤️ for GSSoC 2025
