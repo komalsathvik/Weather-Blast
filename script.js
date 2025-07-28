@@ -397,5 +397,52 @@ function showWeatherForecast(data) {
     <td><img src="https://openweathermap.org/img/wn/${data.daily[7].weather[0].icon}@2x.png"></td>
     </tr>`
 
+if (toggle === 0) {
+    document.querySelector('.forecasttable').querySelectorAll('th').forEach(et => {
+        et.style.color = "rgba(17, 34, 29, 0.7)";
+    });
+    document.querySelector('.forecasttable').querySelectorAll('td').forEach(ed => {
+        ed.style.color = "rgb(233, 239, 236)";
+    });
+    document.querySelectorAll('.forecasttable td, .forecasttable th').forEach(el => {
+        el.style.border = "1px solid rgb(233, 239, 236)";
+    });
+}
 }
 
+//Dark-mode toggle--->>
+
+const darkbtn = document.getElementById('dark-mode');
+
+let toggle = 1;
+
+function changedisplay(){
+    if(toggle){
+        document.querySelector('body').style.backgroundColor = "rgba(17, 34, 29, 0.7)";
+         document.querySelector('body').style.color = "rgb(233, 239, 236)";
+         darkbtn.textContent = "🌙";
+         document.querySelectorAll("table, th, td").forEach(el => {
+         el.style.border = "1px solid rgb(233, 239, 236)";
+         el.style.color = "rgb(233, 239, 236)";
+         });
+         document.querySelector('.forecasttable').querySelectorAll('th').forEach(et => {
+            et.style.color = "rgba(17, 34, 29, 0.7)";
+         });
+        
+        toggle = 0;
+    }
+    else{
+        document.querySelector('body').style.backgroundColor = "rgb(233, 239, 236)"; 
+          document.querySelector('body').style.color = "black";
+          darkbtn.textContent = "☀️";
+          document.querySelectorAll("table, th, td").forEach(el => {
+         el.style.border = "1px solid rgba(22, 66, 60, 1)";
+         el.style.color = "rgba(22, 66, 60, 1)";
+         })
+         
+        toggle = 1;
+    }
+}
+
+
+darkbtn.addEventListener('click', changedisplay);
