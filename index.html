@@ -21,7 +21,8 @@
     <div class="up-container">
         <div class="card">
             <p class="first">ENTER YOUR LOCATION</p>
-            <input type="text" id="city-input" placeholder="Enter city,State name or ZIP Code" oninput="autoComplete()">
+            <input type="text" id="city-input" placeholder="Enter city, State name or ZIP Code"
+                oninput="autoComplete()">
             <div id="suggestion-box">
                 <div id="suggestion-0" class="suggestion"></div>
                 <div id="suggestion-1" class="suggestion"></div>
@@ -36,10 +37,21 @@
         <div class="map-container">
             <div id="map"></div>
         </div>
-
-
     </div>
-    <h2 id="weat">Weather information</h2>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+        <h2 style="margin: 0;" id="weat">Weather Information</h2>
+        <div style="display: flex; align-items: center; gap: 10px; margin-left: 40px;">
+            <span id="unitLabel">°C ⇄ °F</span>
+            <label class="switch">
+                <input type="checkbox" id="unitToggle" aria-label="Toggle temperature unit">
+                <!-- Toggle for Celsius/Fahrenheit -->
+                <span class="slider round"></span>
+            </label>
+
+        </div>
+    </div>
+
 
     <table class="big">
         <tr>
@@ -59,8 +71,8 @@
         <tr>
             <td id="date">DD/MM/YY</td>
             <td id="city">City</td>
-            <td id="temp">0°C</td>
-            <td id="fl">0°C</td>
+            <td id="temp" data-celsius="0">0°C</td> <!-- Temperature in Celsius -->
+            <td id="fl" data-celsius="0">0°C</td> <!-- Feels Like in Celsius -->
             <td id="humi">0 %</td>
             <td id="press">0 atm</td>
             <td id="visi">0 Km</td>
@@ -73,7 +85,10 @@
         </tr>
     </table>
     <table class="small">
-
+        <tr>
+            <th>Date</th>
+            <td id="date1">DD/MM/YY</td>
+        </tr>
         <tr>
             <th>Date</th>
             <td id="date1">DD/MM/YY</td>
@@ -84,11 +99,11 @@
         </tr>
         <tr>
             <th>Temperature</th>
-            <td id="temp1">0°C</td>
+            <td id="temp1" data-celsius="0">0°C</td> <!-- Temperature in Celsius -->
         </tr>
         <tr>
             <th>Feels Like</th>
-            <td id="fl1">0°C</td>
+            <td id="fl1" data-celsius="0">0°C</td> <!-- Feels Like in Celsius -->
         </tr>
         <tr>
             <th>Humidity</th>
@@ -123,7 +138,7 @@
             <td id="wi1">Info</td>
         </tr>
 
-
+        
     </table>
 
     <h2 id="forecast">7 days Weather Forecast</h2>
