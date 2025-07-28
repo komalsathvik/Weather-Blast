@@ -11,7 +11,7 @@ This project is a comprehensive weather application built with **HTML**, **CSS**
 
 ## 🎯 About GSSoC
 
-This project is part of **GirlScript Summer of Code (GSSoC) 2024**! We welcome contributions from developers of all skill levels. Whether you're a beginner looking to make your first open source contribution or an experienced developer, there's something for everyone.
+This project is part of **GirlScript Summer of Code (GSSoC) 2025**! We welcome contributions from developers of all skill levels. Whether you're a beginner looking to make your first open source contribution or an experienced developer, there's something for everyone.
 
 ## 📋 Rules for Pull Requests
 
@@ -120,21 +120,6 @@ Weather-Blast/
 
 - **GeoApify Fallback**: If OpenWeatherMap does not recognize the city name, GeoApify fetches latitude and longitude
 - **Geolocation Access Denied**: Notifies users if location access is restricted
-
-## 🌟 Future Enhancements & Open Issues
-
-Help us improve Weather Blast by working on these features:
-
-- [ ] Add more detailed pollution levels for various pollutants
-- [ ] Implement a 5-day weather and pollution forecast
-- [ ] Enhance the user interface with weather and pollution icons
-- [ ] Provide more descriptive error messages for various API issues
-- [ ] Add dark/light theme toggle
-- [ ] Implement offline caching for recent searches
-- [ ] Add weather alerts and notifications
-- [ ] Create mobile-responsive design
-- [ ] Add unit tests
-- [ ] Implement search history feature
 
 ## 🏆 Contributors
 
