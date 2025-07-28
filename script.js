@@ -420,7 +420,7 @@ function changedisplay(){
     if(toggle){
         document.querySelector('body').style.backgroundColor = "rgba(17, 34, 29, 0.7)";
          document.querySelector('body').style.color = "rgb(233, 239, 236)";
-         darkbtn.textContent = "☀️";
+         darkbtn.textContent = "🌙";
          document.querySelectorAll("table, th, td").forEach(el => {
          el.style.border = "1px solid rgb(233, 239, 236)";
          el.style.color = "rgb(233, 239, 236)";
@@ -434,7 +434,7 @@ function changedisplay(){
     else{
         document.querySelector('body').style.backgroundColor = "rgb(233, 239, 236)"; 
           document.querySelector('body').style.color = "black";
-          darkbtn.textContent = "🌙";
+          darkbtn.textContent = "☀️";
           document.querySelectorAll("table, th, td").forEach(el => {
          el.style.border = "1px solid rgba(22, 66, 60, 1)";
          el.style.color = "rgba(22, 66, 60, 1)";
