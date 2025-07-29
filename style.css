@@ -496,3 +496,27 @@ footer {
     flex-direction: column;
     padding-top: 0.3rem;
 }
+
+#locate{
+    transition: 0.3s;
+}
+
+#locate:hover {
+    background-color: #e0e5e1b5;
+    transform: scale(0.95);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    transition: 0.3s;
+    color:#5e9688
+}
+
+.card button:first-of-type {
+    transition: 0.3s;
+}
+
+.card button:first-of-type:hover {
+    background-color: #e0e5e1b5;
+    transform: scale(0.95);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    transition: 0.3s;
+    color:#5e9688
+}
