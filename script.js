@@ -353,4 +353,18 @@ unitToggle.addEventListener('change', function () {
     updateTemperatureDisplay(isCelsius);
 });
 
+// Scroll to top button
+window.onscroll = function () {
+  const btn = document.getElementById("backToTopBtn");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    btn.style.display = "flex";
+  } else {
+    btn.style.display = "none";
+  }
+};
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 
