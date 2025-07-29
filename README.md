@@ -3,12 +3,15 @@
 
 ## Leaderboard
 
-| Issue No. | Title                                                                                                       | Author                                                                                                                       | Level | Points |
-| --------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----- | ------ |
-| 2         | [Adding a dark mode toggle](https://github.com/RAJIV81205/Weather-Blast/issues/2)                           | [raunak-iiitian](https://github.com/RAJIV81205/Weather-Blast/issues?q=is%3Aissue%20state%3Aclosed%20author%3Araunak-iiitian) | 2     | 7      |
-| 7         | [Adding a footer](https://github.com/RAJIV81205/Weather-Blast/issues/7)                                     | [raunak-iiitian](https://github.com/RAJIV81205/Weather-Blast/issues?q=is%3Aissue%20state%3Aclosed%20author%3Araunak-iiitian) | 3     | 10     |
-| 8         | [Add a “Back to Top” Button for Smoother Navigation](https://github.com/RAJIV81205/Weather-Blast/issues/8)  | [tanush-space](https://github.com/RAJIV81205/Weather-Blast/issues?q=is%3Aissue%20state%3Aclosed%20author%3Atanush-space)     | 1     | 3      |
-| 5         | [Add toggle to switch between Celsius and Fahrenheit](https://github.com/RAJIV81205/Weather-Blast/issues/5) | [milan-deori](https://github.com/milan-deori)                                                                                | 2     | 7      |
+| Issue No.                                                   | Title                                               | Author                                                                                                                       | Level | Points |
+| ----------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----- | ------ |
+| [2](https://github.com/RAJIV81205/Weather-Blast/issues/2)   | Adding a dark mode toggle                           | [raunak-iiitian](https://github.com/RAJIV81205/Weather-Blast/issues?q=is%3Aissue%20state%3Aclosed%20author%3Araunak-iiitian) | 2     | 7      |
+| [7](https://github.com/RAJIV81205/Weather-Blast/issues/7)   | Adding a footer                                     | [raunak-iiitian](https://github.com/RAJIV81205/Weather-Blast/issues?q=is%3Aissue%20state%3Aclosed%20author%3Araunak-iiitian) | 3     | 10     |
+| [8](https://github.com/RAJIV81205/Weather-Blast/issues/8)   | Add a “Back to Top” Button for Smoother Navigation  | [tanush-space](https://github.com/tanush-space)                                                                              | 1     | 3      |
+| [5](https://github.com/RAJIV81205/Weather-Blast/issues/5)   | Add toggle to switch between Celsius and Fahrenheit | [milan-deori](https://github.com/milan-deori)                                                                                | 2     | 7      |
+| [14](https://github.com/RAJIV81205/Weather-Blast/issues/14) | Enhance Card UI: Add Hover Animation to .card Card  | [tanush-space](https://github.com/tanush-space)                                                                              | 2     | 7      |
+
+
 
 **🚀 Live Demo:** [Weather Blast](https://weather-blast.netlify.app/)
 
