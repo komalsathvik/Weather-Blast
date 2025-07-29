@@ -330,13 +330,72 @@ td {
     display: none;
 }
 
+
+/* Toggle Switch Styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d1d1d1;
+    transition: 0.4s ease-in-out;
+    border-radius: 30px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s ease-in-out;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.slider:active:before {
+    width: 28px;
+}
+
+.slider:active {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Scroll To Top Button */
 #backToTopBtn {
   position: fixed;
   bottom: 120px;
   right: 10px;
   width: 50px;
   height: 50px;
-  background-color: #7baea1; /* your green theme */
+  background-color: #7baea1;
   color: white;
   border: none;
   border-radius: 50%;
@@ -350,7 +409,7 @@ td {
 }
 
 #backToTopBtn i {
-  font-size: 30px;  /* BIG ICON HERE */
+  font-size: 30px;
 }
 
 #backToTopBtn:hover {
@@ -358,6 +417,7 @@ td {
   transform: scale(1.1);
 }
 
+/* Footer Styling */
 footer {
     background-color: rgba(106, 156, 137, 0.7);
     width: 100%;
@@ -366,14 +426,12 @@ footer {
     grid-template-columns: 2fr 1fr 2fr;
     padding-bottom: 10px;
     border-top: 2px solid rgba(22, 66, 60, 1);
-    
 }
 
 @media (max-width: 768px) {
   footer {
     grid-template-columns: 1fr;
   }
-  
 }
 
 .logo-name {
@@ -390,7 +448,7 @@ footer {
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 1px;
 }
-.logo-name p{
+.logo-name p {
     padding-top: 0.5rem;
 }
 
@@ -407,13 +465,13 @@ footer {
     font-style: normal;
     -webkit-text-stroke-width: 1px;
     padding-top: 1rem;
-     
 }
 
-.links :hover{
+.links :hover {
     transition: all 1s ease;
     transform: scale(1.1);
 }
+
 .copywright {
     display: flex;
     align-items: center;
