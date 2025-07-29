@@ -128,7 +128,15 @@ h2 {
     color: black;
 }
 
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+
 .card {
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     height: 360px;
