@@ -5,6 +5,15 @@
 [![GSSoC](https://img.shields.io/badge/GSSoC-2025-blue)](https://gssoc.girlscript.tech/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6b263274-fa27-4813-9e3d-3dbb4f005abf/deploy-status)](https://app.netlify.com/sites/weather-blast/deploys)
 
+## Leaderboard
+
+| Issue No. | Title                                               | Author          | Level | Points | Link                   |
+|-----------|-----------------------------------------------------|-----------------|-------|--------|------------------------|
+| 2         | Adding a dark mode toggle                           | raunak-iiitian  | 2     | 7      | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/2)        |
+| 7         | Adding a footer                                     | raunak-iiitian  | 3     | 10     | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/7)        |
+| 8         | Add a “Back to Top” Button for Smoother Navigation  | tanush-space    | 1     | 3      | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/8)        |
+
+
 **🚀 Live Demo:** [Weather Blast](https://weather-blast.netlify.app/)
 
 This project is a comprehensive weather application built with **HTML**, **CSS**, and **JavaScript**. It fetches real-time weather data and air quality information, enhancing users' awareness of both weather and pollution conditions.
