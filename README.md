@@ -9,7 +9,6 @@
 | 5         | Add toggle to switch between Celsius and Fahrenheit | milan-deori     | 2     | 7      | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/5)        |
 | 7         | Adding a footer                                     | raunak-iiitian  | 3     | 10     | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/7)        |
 | 8         | Add a "Back to Top" Button for Smoother Navigation  | tanush-space    | 1     | 3      | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/8)        |
-| 13        | Enhance UI for Weather Info Display                 | Likitha-projects| Duplicate | 0   | [View Issue](https://github.com/RAJIV81205/Weather-Blast/issues/13)       |
 
 **🚀 Live Demo:** [Weather Blast](https://weather-blast.netlify.app/)
 
