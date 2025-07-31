@@ -134,6 +134,7 @@ function fetchWeatherByCoordinates(lat, lon) {
 }
 
 // === DISPLAY WEATHER DETAILS IN UI ===
+// === DISPLAY WEATHER DETAILS IN UI ===
 function displayWeather(data) {
     const { temp, feels_like, humidity, pressure } = data.main;
     const visibility = data.visibility / 1000;
@@ -149,32 +150,85 @@ function displayWeather(data) {
     fetchPollution(lat, lon);
     getWeatherForecast(lat, lon);
 
+    // Titles
     document.getElementById("weat").innerText = `Weather Information : ${city}`;
-    document.getElementById("air").innerText = `Air Pollution : ${city}`;
+    // Fix: "air" ID doesn't exist for the pollution section title.
+    // Assuming you meant the pollution section's <h2>, which doesn't have an ID
+    // or you might want to add one. If you want a similar title, add id="pollution-title" to the <h2>
+    // document.getElementById("air").innerText = `Air Pollution : ${city}`; // This line likely causes an error if "air" ID isn't present.
+                                                                           // The h2 for pollution is "Air Pollution" (static text).
+                                                                           // If you want it dynamic, add id="pollution-title" to the h2 for air pollution.
 
-    // Store base Celsius temp in dataset
+    // Store Celsius in dataset
     ["temp", "fl", "temp1", "fl1"].forEach(id => {
         document.getElementById(id).dataset.celsius = id.includes("fl") ? feels_like : temp;
     });
 
-    // Detect toggle and update unit display
+    // Unit toggle
     const isCelsius = !isFahrenheitToggled();
     updateTemperatureDisplay(isCelsius);
 
-    // Update UI (non-temperature)
-    ["wi", "wi1"].forEach(id => document.getElementById(id).innerText = weatherdes);
-    ["date", "date1"].forEach(id => document.getElementById(id).innerText = date);
-    ["city", "city1"].forEach(id => document.getElementById(id).innerText = city);
-    ["humi", "humi1"].forEach(id => document.getElementById(id).innerText = `${humidity}%`);
-    ["press", "press1"].forEach(id => document.getElementById(id).innerText = `${pressure} hPa`);
-    ["visi", "visi1"].forEach(id => document.getElementById(id).innerText = `${visibility} Km`);
-    ["ws", "ws1"].forEach(id => document.getElementById(id).innerText = `${windSpeed} m/s`);
-    ["sr", "sr1"].forEach(id => document.getElementById(id).innerText = sunrise);
-    ["ss", "ss1"].forEach(id => document.getElementById(id).innerText = sunset);
-    ["cc", "cc1"].forEach(id => document.getElementById(id).innerText = country);
+    // --- Weather data for BIG TABLE and SMALL TABLE ---
+
+    // City
+    document.getElementById("city1").innerText = city; // Corrected for Big Table
+    document.getElementById("city1_small").innerText = city;
+
+    // Date
+    document.getElementById("date1").innerText = date; // Corrected for Big Table
+    document.getElementById("date1_small").innerText = date;
+
+    // Weather Info (Description)
+    document.getElementById("wi").innerText = weatherdes;
+    document.getElementById("wi1").innerText = weatherdes;
+
+    // Humidity
+    document.getElementById("humi").innerText = `${humidity}%`;
+    document.getElementById("humi1").innerText = `${humidity}%`;
+
+    // Pressure
+    document.getElementById("press").innerText = `${pressure} hPa`;
+    document.getElementById("press1").innerText = `${pressure} hPa`;
+
+    // Visibility
+    document.getElementById("visi").innerText = `${visibility} Km`;
+    document.getElementById("visi1").innerText = `${visibility} Km`;
+
+    // Wind Speed
+    document.getElementById("ws").innerText = `${windSpeed} m/s`;
+    document.getElementById("ws1").innerText = `${windSpeed} m/s`;
+
+    // Sunrise
+    document.getElementById("sr").innerText = sunrise;
+    document.getElementById("sr1").innerText = sunrise;
+
+    // Sunset
+    document.getElementById("ss").innerText = sunset;
+    document.getElementById("ss1").innerText = sunset;
+
+    // Country Code
+    document.getElementById("cc").innerText = country;
+    document.getElementById("cc1").innerText = country;
 
     document.getElementById("city-input").value = '';
 }
+
+// Add an initial weather fetch when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    // Existing theme loading logic
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        toggle = 1; // important to allow toggling later
+        changedisplay();
+    } else if (savedTheme === "light") {
+        toggle = 0;
+        changedisplay();
+    }
+
+    // Add this line to fetch weather for a default city (e.g., Kolkata) on load
+    // This will ensure the tables are populated when the page first loads.
+    fetchWeatherByCity("Kolkata");
+});
 
 // === CONVERSION HELPERS ===
 function celsiusToFahrenheit(c) { return (c * 9 / 5) + 32; }
@@ -217,6 +271,11 @@ function displayPollution(data) {
     const label = aqiLabel[aqi - 1] || "Unknown";
     document.getElementById("aqi").innerText = label;
     document.getElementById("aqi1").innerText = label;
+
+    const aqiBigElement = document.getElementById("aqi_big");
+    if (aqiBigElement) { // Always good to check if element exists before setting innerText
+        aqiBigElement.innerText = label;
+    }
 
     // ✅ Health suggestion based on AQI
     let healthMessage = "";
@@ -358,25 +417,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Temperature toggle listener
-function updateTemperatureDisplay(isCelsius) {
-    const tempElements = document.querySelectorAll('[data-celsius]');
-    tempElements.forEach(element => {
-        const tempC = parseFloat(element.dataset.celsius);
-        const displayTemp = isCelsius ? `${tempC.toFixed(1)}°C` : `${((tempC * 9/5) + 32).toFixed(1)}°F`;
-        element.textContent = displayTemp;
-    });
-
-    const currentTemp = parseFloat(document.getElementById('temp').dataset.celsius);
-    const feelsLikeTemp = parseFloat(document.getElementById('fl').dataset.celsius);
-    document.getElementById('temp').textContent = isCelsius ? `${currentTemp}°C` : `${(currentTemp * 9/5 + 32).toFixed(1)}°F`;
-    document.getElementById('fl').textContent = isCelsius ? `${feelsLikeTemp}°C` : `${(feelsLikeTemp * 9/5 + 32).toFixed(1)}°F`;
-
-    // Refresh forecast with updated unit
-    if (lastForecastData) {
-        showWeatherForecast(lastForecastData);
-    }
-}
 
 // Save forecast data globally for reuse
 let lastForecastData = null;
@@ -414,16 +454,16 @@ window.onscroll = function () {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
-//added share button 
+//added share button
 const shareBtn = document.getElementById("shareBtn");
 shareBtn.style.display = "inline-block"; // show the button
 
 shareBtn.onclick = async () => {
-    const city = document.getElementById("city").textContent;
+    // Corrected: Use city1 from the main table
+    const city = document.getElementById("city1").textContent;
     const temperature = document.getElementById("temp").textContent;
     const description = document.getElementById("wi").textContent;
-    const aqi = document.getElementById("aqi").textContent;
+    const aqi = document.getElementById("aqi").textContent; // This will get the AQI from the span in pollution-info
 
     const shareText = `📍 ${city}\n🌡️ Temp: ${temperature}\n🌤️ ${description}\n🌫️ AQI: ${aqi}\nShared via Weather Blast`;
 
@@ -437,16 +477,12 @@ shareBtn.onclick = async () => {
             console.error("Share failed:", err);
         }
     } else {
+        // Fallback for browsers that don't support Web Share API
         navigator.clipboard.writeText(shareText).then(() => {
             alert("Copied to clipboard!");
         });
     }
 };
-//to get the health message 
-document.getElementById("aqi").innerText = label;
-document.getElementById("aqi1").innerText = label;
-
-document.getElementById("aqi-message").innerText = healthMessage;
 
 
 
