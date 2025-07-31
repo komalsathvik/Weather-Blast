@@ -442,6 +442,11 @@ shareBtn.onclick = async () => {
         });
     }
 };
+//to get the health message 
+document.getElementById("aqi").innerText = label;
+document.getElementById("aqi1").innerText = label;
+
+document.getElementById("aqi-message").innerText = healthMessage;
 
 
 
