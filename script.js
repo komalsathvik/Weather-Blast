@@ -152,12 +152,6 @@ function displayWeather(data) {
 
     // Titles
     document.getElementById("weat").innerText = `Weather Information : ${city}`;
-    // Fix: "air" ID doesn't exist for the pollution section title.
-    // Assuming you meant the pollution section's <h2>, which doesn't have an ID
-    // or you might want to add one. If you want a similar title, add id="pollution-title" to the <h2>
-    // document.getElementById("air").innerText = `Air Pollution : ${city}`; // This line likely causes an error if "air" ID isn't present.
-                                                                           // The h2 for pollution is "Air Pollution" (static text).
-                                                                           // If you want it dynamic, add id="pollution-title" to the h2 for air pollution.
 
     // Store Celsius in dataset
     ["temp", "fl", "temp1", "fl1"].forEach(id => {
@@ -224,8 +218,6 @@ document.addEventListener("DOMContentLoaded", () => {
         toggle = 0;
         changedisplay();
     }
-
-    // Add this line to fetch weather for a default city (e.g., Kolkata) on load
     // This will ensure the tables are populated when the page first loads.
     fetchWeatherByCity("Kolkata");
 });
