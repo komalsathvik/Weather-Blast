@@ -255,7 +255,7 @@ function showWeatherForecast(data) {
     const sunrises = forecast.map(day => `<td>${new Date(day.sunrise * 1000).toLocaleTimeString('en-US', opt)}</td>`).join("");
     const sunsets = forecast.map(day => `<td>${new Date(day.sunset * 1000).toLocaleTimeString('en-US', opt)}</td>`).join("");
     const summaries = forecast.map(day => `<td>${day.weather[0].description}</td>`).join("");
-    const icons = forecast.map(day => `<td><img src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"></td>`).join("");
+    const icons = forecast.map(day => `<td class = "icons-block"><img src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"></td>`).join("");
 
     document.getElementById("forecast").style.display = "block";
     document.getElementById("forecast-table").innerHTML = `

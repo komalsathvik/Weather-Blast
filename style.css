@@ -222,6 +222,10 @@ td {
     font-style: normal;
 }
 
+.icons-block{
+    background: linear-gradient(rgb(211, 245, 145), rgb(105, 151, 105));
+}
+
 
 .small {
     display: none;
