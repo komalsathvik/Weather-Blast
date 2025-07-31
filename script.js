@@ -385,4 +385,33 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+//added share button 
+const shareBtn = document.getElementById("shareBtn");
+shareBtn.style.display = "inline-block"; // show the button
+
+shareBtn.onclick = async () => {
+    const city = document.getElementById("city").textContent;
+    const temperature = document.getElementById("temp").textContent;
+    const description = document.getElementById("wi").textContent;
+    const aqi = document.getElementById("aqi").textContent;
+
+    const shareText = `📍 ${city}\n🌡️ Temp: ${temperature}\n🌤️ ${description}\n🌫️ AQI: ${aqi}\nShared via Weather Blast`;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: "Weather Update",
+                text: shareText,
+            });
+        } catch (err) {
+            console.error("Share failed:", err);
+        }
+    } else {
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert("Copied to clipboard!");
+        });
+    }
+};
+
+
 
