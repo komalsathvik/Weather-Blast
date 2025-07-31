@@ -11,6 +11,7 @@
 | [5](https://github.com/RAJIV81205/Weather-Blast/issues/5)   | Add toggle to switch between Celsius and Fahrenheit                              | [milan-deori](https://github.com/milan-deori)                                                                                | 2     | 7      |
 | [14](https://github.com/RAJIV81205/Weather-Blast/issues/14) | Enhance Card UI: Add Hover Animation to .card Card                               | [tanush-space](https://github.com/tanush-space)                                                                              | 2     | 7      |
 | [1](https://github.com/RAJIV81205/Weather-Blast/issues/1)   | adding hover effect to the search button and enhancing the "Use Current Location | [RAJVEER42](https://github.com/RAJVEER42)                                                                                    | 2     | 7      |
+| [22](https://github.com/RAJIV81205/Weather-Blast/issues/22) | Add mit license file to the project                                              | [Tanyasharma71](https://github.com/Tanyasharma71)                                                                            | 1     | 3      |
 
 
 
