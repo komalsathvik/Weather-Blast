@@ -23,7 +23,21 @@ window.onload = initMap;
 function initMap1(data) {
     const latitude = data.coord.lat;
     const longitude = data.coord.lon;
-    map = new mappls.Map("map", { center: [latitude, longitude] });
+
+    map.setCenter({ lat: latitude, lng: longitude });
+
+    if (window.currentMarker) {
+        window.currentMarker.remove();
+    }
+
+    const marker = new mappls.Marker({
+        map: map,
+        position: { lat: latitude, lng: longitude },
+        title: "Selected Location"
+    });
+
+    // Save reference to current marker globally
+    window.currentMarker = marker;
 }
 
 // === AUTOCOMPLETE LOCATION INPUT ===
@@ -47,6 +61,7 @@ function getSuggestion(input) {
                 address: feature.properties.address_line1,
                 state: feature.properties.state,
                 country: feature.properties.country,
+
             }));
             updateSuggestions(suggestions);
         })
