@@ -218,6 +218,35 @@ function displayPollution(data) {
     document.getElementById("aqi").innerText = label;
     document.getElementById("aqi1").innerText = label;
 
+    // ✅ Health suggestion based on AQI
+    let healthMessage = "";
+    switch (aqi) {
+        case 1:
+            healthMessage = "Air quality is good. No health risk.";
+            break;
+        case 2:
+            healthMessage = "Air quality is fair. Sensitive people should take precautions.";
+            break;
+        case 3:
+            healthMessage = "Moderate risk for sensitive groups. Limit prolonged outdoor exertion.";
+            break;
+        case 4:
+            healthMessage = "Poor air quality. General public may experience discomfort.";
+            break;
+        case 5:
+            healthMessage = "Very poor. Avoid outdoor activities if possible.";
+            break;
+        default:
+            healthMessage = "Air quality data unavailable.";
+    }
+
+    // Insert this message into the DOM (You must add a tag with id="aqi-message" in HTML)
+    const messageElement = document.getElementById("aqi-message");
+    if (messageElement) {
+        messageElement.innerText = healthMessage;
+    }
+
+    // Existing pollutant values
     const pollutionMetrics = ["co", "no", "no2", "o3", "so2", "pm2_5", "pm10", "nh3"];
     pollutionMetrics.forEach(metric => {
         const value = components[metric];
@@ -226,6 +255,7 @@ function displayPollution(data) {
         document.getElementById(label + "1").innerText = `${value} μg/m3`;
     });
 }
+
 
 // Forecast display with °C ⇄ °F toggle support
 function getWeatherForecast(lat, lon) {
