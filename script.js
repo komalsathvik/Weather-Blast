@@ -285,7 +285,8 @@ function showWeatherForecast(data) {
 const darkbtn = document.getElementById('dark-mode');
 let toggle = 1;
 function changedisplay() {
-    if (toggle) {
+    if (toggle == 1) {
+        // dark mode styling
         document.querySelector('body').style.backgroundColor = "rgba(17, 34, 29, 0.7)";
         document.querySelector('body').style.color = "rgb(233, 239, 236)";
         darkbtn.textContent = "🌙";
@@ -293,11 +294,13 @@ function changedisplay() {
             el.style.border = "1px solid rgb(233, 239, 236)";
             el.style.color = "rgb(233, 239, 236)";
         });
-        document.querySelector('.forecasttable').querySelectorAll('th').forEach(et => {
+        document.querySelector('.forecasttable')?.querySelectorAll('th').forEach(et => {
             et.style.color = "rgba(17, 34, 29, 0.7)";
         });
+        localStorage.setItem("theme", "dark"); 
         toggle = 0;
     } else {
+        // light mode styling
         document.querySelector('body').style.backgroundColor = "rgb(233, 239, 236)";
         document.querySelector('body').style.color = "black";
         darkbtn.textContent = "☀️";
@@ -305,10 +308,25 @@ function changedisplay() {
             el.style.border = "1px solid rgba(22, 66, 60, 1)";
             el.style.color = "rgba(22, 66, 60, 1)";
         });
+        localStorage.setItem("theme", "light"); 
         toggle = 1;
     }
 }
+
 darkbtn.addEventListener('click', changedisplay);
+
+// Check for saved theme in localStorage and apply on load
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        toggle = 1; // important to allow toggling later
+        changedisplay();
+    } else if (savedTheme === "light") {
+        toggle = 0;
+        changedisplay();
+    }
+});
+
 
 // Temperature toggle listener
 function updateTemperatureDisplay(isCelsius) {
