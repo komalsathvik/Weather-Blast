@@ -12,6 +12,8 @@
 | [14](https://github.com/RAJIV81205/Weather-Blast/issues/14) | Enhance Card UI: Add Hover Animation to .card Card                               | [tanush-space](https://github.com/tanush-space)                                                                              | 2     | 7      |
 | [1](https://github.com/RAJIV81205/Weather-Blast/issues/1)   | adding hover effect to the search button and enhancing the "Use Current Location | [RAJVEER42](https://github.com/RAJVEER42)                                                                                    | 2     | 7      |
 | [22](https://github.com/RAJIV81205/Weather-Blast/issues/22) | Add mit license file to the project                                              | [Tanyasharma71](https://github.com/Tanyasharma71)                                                                            | 1     | 3      |
+| [27](https://github.com/RAJIV81205/Weather-Blast/issues/27) | Persist Dark Mode Preference Using localStorage                                  | [infinitepush](https://github.com/infinitepush)                                                                              | 2     | 7      |
+| [29](https://github.com/RAJIV81205/Weather-Blast/issues/29) | Add Share Button to Share Weather Info via Web Share API                         | [infinitepush](https://github.com/infinitepush)                                                                              | 3     | 10     |
 
 
 
