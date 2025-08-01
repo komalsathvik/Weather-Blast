@@ -246,7 +246,13 @@ td {
     display: none;
 }
 
-
+#forecast-section, #tempLineChart{
+    width: 800px;
+    height: 400px;
+}
+#forecast-section{
+    margin-bottom: 80px;
+}
 
 @media screen and (max-width:1000px) {
     .big {
@@ -266,6 +272,11 @@ td {
 
     h2 {
         text-decoration: underline;
+    }
+
+    #tempLineChart, #forecast-section{
+        width: 600px;
+        height: 300px;
     }
 
 
