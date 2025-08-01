@@ -4,6 +4,7 @@ const geoAPI = '2783701aa79748f9b21e86f7ca361dd4'; // GeoApify API key
 const opt = { timeStyle: 'short', hour12: true }; // Time formatting options
 
 let map; // Global map object
+let isUserSearch = false; // For auto scrolling
 
 // === Check Toggle State ===
 function isFahrenheitToggled() {
@@ -38,6 +39,13 @@ function initMap1(data) {
 
     // Save reference to current marker globally
     window.currentMarker = marker;
+}
+// scrollable page 
+function scrollToWeatherInfo() {
+    const weatherSection = document.getElementById("weat");
+    if (weatherSection) {
+        weatherSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 }
 
 // === AUTOCOMPLETE LOCATION INPUT ===
@@ -87,12 +95,14 @@ function updateSuggestions(suggestions) {
 function getWeatherByCity() {
     const city = document.getElementById("city-input").value;
     if (!city) return alert("PLEASE ENTER CITY NAME");
+    isUserSearch = true;
     fetchWeatherByCity(city);
 }
 
 // === FETCH WEATHER FOR CURRENT LOCATION ===
 function getWeatherByLocation() {
     if (navigator.geolocation) {
+        isUserSearch = true;
         navigator.geolocation.getCurrentPosition(pos => {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
@@ -220,20 +230,27 @@ function displayWeather(data) {
     document.getElementById("cc1").innerText = country;
 
     document.getElementById("city-input").value = '';
+    if (isUserSearch) {
+    scrollToWeatherInfo();
+    isUserSearch = false; // reset
 }
 
+}
+window.addEventListener('beforeunload', function () {
+    window.scrollTo(0, 0);
+});
 // Add an initial weather fetch when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     // Existing theme loading logic
+    cindow.scrollTo(0, 0);
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
-        toggle = 1; // important to allow toggling later
+        toggle = 1;
         changedisplay();
     } else if (savedTheme === "light") {
         toggle = 0;
         changedisplay();
     }
-    // This will ensure the tables are populated when the page first loads.
     fetchWeatherByCity("Kolkata");
 });
 
