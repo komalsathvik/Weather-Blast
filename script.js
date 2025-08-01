@@ -612,6 +612,9 @@ const unitToggle = document.getElementById('unitToggle');
 unitToggle.addEventListener('change', function () {
     const isCelsius = !this.checked;
     updateTemperatureDisplay(isCelsius);
+    if (lastForecastData) {
+        showWeatherForecast(lastForecastData); 
+    }
 });
 
 // Scroll to top button
