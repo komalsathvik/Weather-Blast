@@ -129,6 +129,9 @@ function fetchWeatherByCity(city) {
         });
 }
 
+
+
+
 // === GET LAT/LON FROM CITY NAME ===
 function fetchLatLon(city) {
     const url = `https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=${geoAPI}`;
@@ -621,3 +624,54 @@ shareBtn.onclick = async () => {
 
 
 
+//SHOW RECENT SEARCHES;
+const searchInput = document.getElementById('city-input');
+const searchBtn = document.querySelector('button[onclick="getWeatherByCity()"]');
+const recentList = document.getElementById('recent-list');
+const resetBtn = document.getElementById('reset-searches-btn');
+
+// Update recent searches in localStorage and re-render list
+function updateRecentSearches(newSearch) {
+  let recent = JSON.parse(localStorage.getItem('recentSearches')) || [];
+  recent = recent.filter(item => item.toLowerCase() !== newSearch.toLowerCase());
+  recent.unshift(newSearch);
+  if (recent.length > 5) recent = recent.slice(0, 5);
+  localStorage.setItem('recentSearches', JSON.stringify(recent));
+  renderRecentSearches();
+}
+
+// Render recent searches as clickable list items
+function renderRecentSearches() {
+  const recent = JSON.parse(localStorage.getItem('recentSearches')) || [];
+  if (recent.length === 0) {
+    recentList.innerHTML = '<li>No recent searches yet.</li>';
+    return;
+  }
+
+  recentList.innerHTML = recent
+    .map(item => `<li class="recent-item" tabindex="0" role="button">${item}</li>`)
+    .join('');
+
+  document.querySelectorAll('.recent-item').forEach(el => {
+    el.onclick = () => {
+      searchInput.value = el.innerText;
+      getWeatherByCity();
+    };
+  });
+}
+
+// On Search button click, update recent searches and fetch weather
+searchBtn.addEventListener('click', () => {
+  const query = searchInput.value.trim();
+  if (!query) return alert("PLEASE ENTER CITY NAME");
+  updateRecentSearches(query);
+});
+
+// Reset recent searches and update display
+resetBtn.addEventListener('click', () => {
+  localStorage.removeItem('recentSearches');
+  renderRecentSearches();
+});
+
+// Render recent searches on page load
+window.addEventListener('DOMContentLoaded', renderRecentSearches);
