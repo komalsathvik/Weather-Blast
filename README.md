@@ -19,6 +19,8 @@
 | [42](https://github.com/RAJIV81205/Weather-Blast/issues/42) | Feature: Add marker to map when a location is searched                           | [DivyanshGarg380](https://github.com/DivyanshGarg380)                                                                        | 3     | 10     |
 | [30](https://github.com/RAJIV81205/Weather-Blast/issues/30) | Add Line Chart to Show 7-Day Temperature Trend                                   | [SarvaniBalivada](https://github.com/SarvaniBalivada)                                                                        | 3     | 10     |
 | [25](https://github.com/RAJIV81205/Weather-Blast/issues/25) | Feature: Add fun notes for specific weather type                                 | [Ayushii-uniyal](https://github.com/Ayushii-uniyal)                                                                          | 2     | 7      |
+| [52](https://github.com/RAJIV81205/Weather-Blast/issues/52) | Feature : Auto-scroll to Weather Info Section After Search                       | [DivyanshGarg380](https://github.com/DivyanshGarg380)                                                                        | 2     | 7      |
+| [50](https://github.com/RAJIV81205/Weather-Blast/issues/50) | Add recent searches and reset history button feature                             | [ananya-asa](https://github.com/ananya-asa)                                                                                  | 3     | 10     |
 
 
 
