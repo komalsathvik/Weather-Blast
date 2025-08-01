@@ -39,6 +39,13 @@ function initMap1(data) {
     // Save reference to current marker globally
     window.currentMarker = marker;
 }
+// scrollable page 
+function scrollToWeatherInfo() {
+    const weatherSection = document.getElementById("weat");
+    if (weatherSection) {
+        weatherSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
 
 // === AUTOCOMPLETE LOCATION INPUT ===
 function autoComplete() {
@@ -220,6 +227,8 @@ function displayWeather(data) {
     document.getElementById("cc1").innerText = country;
 
     document.getElementById("city-input").value = '';
+    scrollToWeatherInfo();
+
 }
 
 // Add an initial weather fetch when the page loads
