@@ -251,6 +251,9 @@ td {
     height: 400px;
 }
 #forecast-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 80px;
 }
 
@@ -303,6 +306,10 @@ td {
         height: 250px !important;
         width: 320px !important;
 
+    }
+    #tempLineChart, #forecast-section{
+        width: 350px;
+        height: 200px;
     }
 
 
