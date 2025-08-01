@@ -167,6 +167,8 @@ function displayWeather(data) {
     const { temp, feels_like, humidity, pressure } = data.main;
     const visibility = data.visibility / 1000;
     const windSpeed = data.wind.speed;
+    const windDeg = data.wind.deg;
+    const windArrow = getWindDirectionArrow(windDeg);
     const date = new Date(data.dt * 1000).toLocaleDateString();
     const weatherdes = data.weather[0].main;
     const { country } = data.sys;
@@ -217,8 +219,8 @@ function displayWeather(data) {
     document.getElementById("visi1").innerText = `${visibility} Km`;
 
     // Wind Speed
-    document.getElementById("ws").innerText = `${windSpeed} m/s`;
-    document.getElementById("ws1").innerText = `${windSpeed} m/s`;
+    document.getElementById("ws").innerText = `${windSpeed} m/s ${windArrow}`;
+    document.getElementById("ws1").innerText = `${windSpeed} m/s ${windArrow}`;
 
     // Sunrise
     document.getElementById("sr").innerText = sunrise;
@@ -589,7 +591,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
+// This is for showing wind direction
+function getWindDirectionArrow(deg) {
+    if (deg >= 337.5 || deg < 22.5) return '↑ N';
+    if (deg >= 22.5 && deg < 67.5) return '↗ NE';
+    if (deg >= 67.5 && deg < 112.5) return '→ E';
+    if (deg >= 112.5 && deg < 157.5) return '↘ SE';
+    if (deg >= 157.5 && deg < 202.5) return '↓ S';
+    if (deg >= 202.5 && deg < 247.5) return '↙ SW';
+    if (deg >= 247.5 && deg < 292.5) return '← W';
+    if (deg >= 292.5 && deg < 337.5) return '↖ NW';
+    return '❓';
+}
 
 // Save forecast data globally for reuse
 let lastForecastData = null;
@@ -601,6 +614,7 @@ function getWeatherForecast(lat, lon) {
         .then(data => {
             lastForecastData = data;
             showWeatherForecast(data);
+
         })
         .catch(error => {
             console.error('Error fetching Forecast', error);
@@ -612,6 +626,9 @@ const unitToggle = document.getElementById('unitToggle');
 unitToggle.addEventListener('change', function () {
     const isCelsius = !this.checked;
     updateTemperatureDisplay(isCelsius);
+    if (lastForecastData) {
+        showWeatherForecast(lastForecastData); 
+    }
 });
 
 // Scroll to top button
