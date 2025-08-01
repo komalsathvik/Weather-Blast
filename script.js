@@ -236,19 +236,21 @@ function displayWeather(data) {
 }
 
 }
-
+window.addEventListener('beforeunload', function () {
+    window.scrollTo(0, 0);
+});
 // Add an initial weather fetch when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     // Existing theme loading logic
+    cindow.scrollTo(0, 0);
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
-        toggle = 1; // important to allow toggling later
+        toggle = 1;
         changedisplay();
     } else if (savedTheme === "light") {
         toggle = 0;
         changedisplay();
     }
-    // This will ensure the tables are populated when the page first loads.
     fetchWeatherByCity("Kolkata");
 });
 
