@@ -14,6 +14,11 @@
 | [22](https://github.com/RAJIV81205/Weather-Blast/issues/22) | Add mit license file to the project                                              | [Tanyasharma71](https://github.com/Tanyasharma71)                                                                            | 1     | 3      |
 | [27](https://github.com/RAJIV81205/Weather-Blast/issues/27) | Persist Dark Mode Preference Using localStorage                                  | [infinitepush](https://github.com/infinitepush)                                                                              | 2     | 7      |
 | [29](https://github.com/RAJIV81205/Weather-Blast/issues/29) | Add Share Button to Share Weather Info via Web Share API                         | [infinitepush](https://github.com/infinitepush)                                                                              | 3     | 10     |
+| [23](https://github.com/RAJIV81205/Weather-Blast/issues/23) | Enhance icons for weather description                                            | [Ayushii-uniyal](https://github.com/Ayushii-uniyal)                                                                          | 2     | 7      |
+| [33](https://github.com/RAJIV81205/Weather-Blast/issues/33) | Title: Add Health Suggestions Based on AQI Level                                 | [infinitepush](https://github.com/infinitepush)                                                                              | 2     | 7      |
+| [42](https://github.com/RAJIV81205/Weather-Blast/issues/42) | Feature: Add marker to map when a location is searched                           | [DivyanshGarg380](https://github.com/DivyanshGarg380)                                                                        | 3     | 10     |
+| [30](https://github.com/RAJIV81205/Weather-Blast/issues/30) | Add Line Chart to Show 7-Day Temperature Trend                                   | [SarvaniBalivada](https://github.com/SarvaniBalivada)                                                                        | 3     | 10     |
+| [25](https://github.com/RAJIV81205/Weather-Blast/issues/25) | Feature: Add fun notes for specific weather type                                 | [Ayushii-uniyal](https://github.com/Ayushii-uniyal)                                                                          | 2     | 7      |
 
 
 

@@ -23,7 +23,21 @@ window.onload = initMap;
 function initMap1(data) {
     const latitude = data.coord.lat;
     const longitude = data.coord.lon;
-    map = new mappls.Map("map", { center: [latitude, longitude] });
+
+    map.setCenter({ lat: latitude, lng: longitude });
+
+    if (window.currentMarker) {
+        window.currentMarker.remove();
+    }
+
+    const marker = new mappls.Marker({
+        map: map,
+        position: { lat: latitude, lng: longitude },
+        title: "Selected Location"
+    });
+
+    // Save reference to current marker globally
+    window.currentMarker = marker;
 }
 
 // === AUTOCOMPLETE LOCATION INPUT ===
@@ -47,6 +61,7 @@ function getSuggestion(input) {
                 address: feature.properties.address_line1,
                 state: feature.properties.state,
                 country: feature.properties.country,
+
             }));
             updateSuggestions(suggestions);
         })
@@ -327,6 +342,40 @@ function getWeatherForecast(lat, lon) {
 function convertTemp(temp, isCelsius) {
     return isCelsius ? `${temp.toFixed(1)} °C` : `${((temp * 9/5) + 32).toFixed(1)} °F`;
 }
+//Adding an object for notes 
+const notes = {
+    clear: ["Sun’s out, shades on! Don’t forget sunscreen 😎", "Perfect day for an ice cream or a long walk 🍦🚶‍♀️", "Clear skies and good vibes ahead 🌞✨"],
+    clouds: ["Clouds are having a meeting up there! ☁️", "Still a great day to be outdoors — maybe a light jacket?", "Sky's wearing a gray sweater today! 🌫️"],
+    rain: ["Don’t forget your umbrella — it's nature’s splash party ☔💃", "Perfect day for pakoras and Netflix 🍲🎬", "Tiny droplets, big cozy vibes!"],
+    snow: ["Snowball fights or hot cocoa? Or both? ☕❄️", "Snowflakes are saying hello! ❄️👋", "Winter wonderland loading... ⛄❄️"],
+    thunderstorm: ["⚡ Dramatic skies incoming! Stay safe and unplug if needed.", "A good day to stay in and watch the show from your window 🎭", "It's Thor's bowling night! ⚡🎳"],
+    atmosphere: ["Dreamy, soft-focus day! 🌫️✨", "It’s one of those days… where the air's got secrets. Stay curious, stay indoors if needed! 🔮🌪️", "Atmospheric trickery afoot! The skies are casting illusions — step carefully, seer of weather 👁️‍🗨️🌫️"]
+}
+
+//categories grouping together weather desc 
+const weatherKeywords = {
+    clear: ['clear', 'sunny'], clouds: ['cloud', 'overcast'], rain: ['rain', 'drizzle', 'shower'], snow: ["snow", "sleet"], thunderstorm: ['thunderstorm', 'thunder'], atmosphere: ['mist', 'fog', 'haze', 'smoke', 'dust', 'sand', 'tornado']
+}
+
+//assign category to weather desc info
+function extractWeatherInfo(weatherMain = ''){
+    const main = weatherMain.toLowerCase();
+    for(const [category, keywords] of Object.entries(weatherKeywords)){
+        if(keywords.some(keyword=>main.includes(keyword))){
+            return category;
+        }
+    }
+    return 'clear';
+}
+
+//function to give note randomly
+function giveNotes(weatherMain = ''){
+    const category = extractWeatherInfo(weatherMain);
+    const note = notes[category];
+
+    const randomIdx = Math.floor(Math.random()*note.length);
+    return note[randomIdx];
+}
 
 function showWeatherForecast(data) {
     const isCelsius = !document.getElementById('unitToggle').checked;
@@ -340,8 +389,11 @@ function showWeatherForecast(data) {
     const sunsets = forecast.map(day => `<td>${new Date(day.sunset * 1000).toLocaleTimeString('en-US', opt)}</td>`).join("");
     const summaries = forecast.map(day => `<td>${day.weather[0].description}</td>`).join("");
     const icons = forecast.map(day => `<td class = "icons-block"><img src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"></td>`).join("");
+    const noteForUser = forecast.map(day => `<td class = "notes"><p class="notes-txt">${giveNotes(day.weather[0].main)}</p></td>`).join("");
 
     document.getElementById("forecast").style.display = "block";
+    document.getElementById("forecast-section").style.display = "block";
+
     document.getElementById("forecast-table").innerHTML = `
         <tr><th>Date</th>${dates}</tr>
         <tr><th>Max-Temperature</th>${maxTemps}</tr>
@@ -349,6 +401,7 @@ function showWeatherForecast(data) {
         <tr><th>Sunrise</th>${sunrises}</tr>
         <tr><th>Sunset</th>${sunsets}</tr>
         <tr><th>Summary</th>${summaries}</tr>
+        <tr><th>Something for you!<br>(hover to unlock)</th>${noteForUser}</tr>
         <tr><th>Icon</th>${icons}</tr>
     `;
 
@@ -363,6 +416,79 @@ function showWeatherForecast(data) {
             el.style.border = "1px solid rgb(233, 239, 236)";
         });
     }
+
+ 
+  
+    const ctx = document.getElementById('tempLineChart').getContext('2d');
+
+    const chartLabels = forecast.map(day => new Date(day.dt * 1000).toLocaleDateString());
+    const maxTempValues = forecast.map(day => isCelsius ? day.temp.max : (day.temp.max * 9/5 + 32));
+    const minTempValues = forecast.map(day => isCelsius ? day.temp.min : (day.temp.min * 9/5 + 32));
+
+    // Destroy previous chart if it exists
+    if (window.tempChart) {
+        window.tempChart.destroy();
+    }
+
+    window.tempChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [
+                {
+                    label: 'Max Temp',
+                    data: maxTempValues,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                },
+                {
+                    label: 'Min Temp',
+                    data: minTempValues,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: toggle === 0 ? 'white' : 'rgba(22, 66, 60, 1)'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: '7-Day Temperature Trend',
+                    color: toggle === 0 ? 'white' : 'rgba(22, 66, 60, 1)'
+                }
+            },
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: `Temperature (${isCelsius ? '°C' : '°F'})`,
+                        color: toggle === 0 ? 'white' : 'rgba(22, 66, 60, 1)'
+                    },
+                    ticks: {
+                        color: toggle === 0 ? 'white' : 'rgba(22, 66, 60, 1)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: toggle === 0 ? 'white' : 'rgba(22, 66, 60, 1)'
+                    }
+                }
+            }
+        }
+    });
+
+
 }
 
 // Dark-mode toggle
