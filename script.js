@@ -4,6 +4,7 @@ const geoAPI = '2783701aa79748f9b21e86f7ca361dd4'; // GeoApify API key
 const opt = { timeStyle: 'short', hour12: true }; // Time formatting options
 
 let map; // Global map object
+let isUserSearch = false; // For auto scrolling
 
 // === Check Toggle State ===
 function isFahrenheitToggled() {
@@ -94,12 +95,14 @@ function updateSuggestions(suggestions) {
 function getWeatherByCity() {
     const city = document.getElementById("city-input").value;
     if (!city) return alert("PLEASE ENTER CITY NAME");
+    isUserSearch = true;
     fetchWeatherByCity(city);
 }
 
 // === FETCH WEATHER FOR CURRENT LOCATION ===
 function getWeatherByLocation() {
     if (navigator.geolocation) {
+        isUserSearch = true;
         navigator.geolocation.getCurrentPosition(pos => {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
@@ -227,7 +230,10 @@ function displayWeather(data) {
     document.getElementById("cc1").innerText = country;
 
     document.getElementById("city-input").value = '';
+    if (isUserSearch) {
     scrollToWeatherInfo();
+    isUserSearch = false; // reset
+}
 
 }
 
