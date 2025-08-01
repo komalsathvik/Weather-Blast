@@ -396,6 +396,11 @@ function giveNotes(weatherMain = ''){
 
 function showWeatherForecast(data) {
     const isCelsius = !document.getElementById('unitToggle').checked;
+     if (data.alerts && data.alerts.length > 0) {
+        displayWeatherAlerts(data.alerts);
+    } else {
+        hideWeatherAlerts();
+    }
     const forecast = data.daily.slice(0, 8);
     const opt = { hour: '2-digit', minute: '2-digit' };
 
@@ -434,7 +439,37 @@ function showWeatherForecast(data) {
         });
     }
 
- 
+    function displayWeatherAlerts(alerts) {
+    const alertBox = document.getElementById("weather-alert-box");
+    alertBox.innerHTML = ''; // Clear previous alerts
+
+    alerts.forEach(alert => {
+        const alertEl = document.createElement("div");
+        alertEl.className = "alert-card";
+        alertEl.innerHTML = `
+            <div class="alert-header">
+                ⚠️ ${alert.event}
+                <button class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</button>
+            </div>
+            <div class="alert-body">
+                <p><strong>From:</strong> ${new Date(alert.start * 1000).toLocaleString()}</p>
+                <p><strong>To:</strong> ${new Date(alert.end * 1000).toLocaleString()}</p>
+                <p><strong>Description:</strong><br>${alert.description.replace(/\n/g, '<br>')}</p>
+                <p><strong>Source:</strong> ${alert.sender_name}</p>
+            </div>
+        `;
+        alertBox.appendChild(alertEl);
+    });
+
+        alertBox.style.display = "block";
+    }
+
+    function hideWeatherAlerts() {
+        const alertBox = document.getElementById("weather-alert-box");
+        alertBox.innerHTML = "";
+        alertBox.style.display = "none";
+}
+    
   
     const ctx = document.getElementById('tempLineChart').getContext('2d');
 
