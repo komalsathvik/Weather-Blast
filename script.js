@@ -81,6 +81,28 @@ function getSuggestion(input) {
         .catch(err => console.log('Error fetching suggestions:', err));
 }
 
+function animateTemperature(element, start, end, unit, duration = 800) {
+    const stepTime = 20; 
+    const steps = Math.floor(duration / stepTime);
+    let currentStep = 0;
+    const diff = end - start;
+
+    if (Math.round(start) === Math.round(end)) {
+        element.textContent = `${end.toFixed(1)}${unit}`;
+        return;
+    }
+
+    const timer = setInterval(() => {
+        currentStep++;
+        const newValue = start + (diff * currentStep) / steps;
+        element.textContent = `${newValue.toFixed(1)}${unit}`;
+        if (currentStep >= steps) {
+            element.textContent = `${end.toFixed(1)}${unit}`;
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
 // === POPULATE AUTOCOMPLETE SUGGESTIONS ===
 function updateSuggestions(suggestions) {
     const suggestionBox = document.getElementById("suggestion-box");
@@ -361,15 +383,21 @@ function fahrenheitToCelsius(f) { return (f - 32) * 5 / 9; }
 // === TOGGLE CELSIUS/FAHRENHEIT DISPLAY ===
 function updateTemperatureDisplay(isCelsius) {
     const elements = ["temp", "fl", "temp1", "fl1"];
-    elements.forEach(id => {
-        const el = document.getElementById(id);
-        const c = parseFloat(el.dataset.celsius);
-        if (isCelsius) {
-            el.innerText = `${c.toFixed(1)}°C`;
-        } else {
-            const f = celsiusToFahrenheit(c);
-            el.innerText = `${f.toFixed(1)}°F`;
-        }
+elements.forEach(id => {
+    const el = document.getElementById(id);
+    const c = parseFloat(el.dataset.celsius);
+    let displayed = el.textContent;
+    let oldVal = parseFloat(displayed);
+    if (isNaN(oldVal)) oldVal = c;
+    let newVal, unit;
+    if (isCelsius) {
+        newVal = c;
+        unit = "°C";
+    } else {
+        newVal = celsiusToFahrenheit(c);
+        unit = "°F";
+    }
+        animateTemperature(el, oldVal, newVal, unit);
     });
 
     // Update nearby cities temperatures
