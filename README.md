@@ -24,6 +24,7 @@
 | [56](https://github.com/RAJIV81205/Weather-Blast/issues/56) | Feature : Add Weather Alert Notification UI                                                       | [DivyanshGarg380](https://github.com/DivyanshGarg380)                                                                        | 3     | 10     |
 | [46](https://github.com/RAJIV81205/Weather-Blast/issues/46) | Improve responsiveness of graph section                                                           | [Ayushii-uniyal](https://github.com/Ayushii-uniyal)                                                                          | 2     | 7      |
 | [62](https://github.com/RAJIV81205/Weather-Blast/issues/62) | Bug : Upon changing from °C to °F and Vice Versa , the values in the 7 Day Forecast dont change ! | [DivyanshGarg380](https://github.com/DivyanshGarg380)                                                                        | 3     | 10     |
+| [68](https://github.com/RAJIV81205/Weather-Blast/issues/68) | Mismatch in Card Background Color                                                                 | [Shreyaraut12](https://github.com/Shreyaraut12)                                                                              | 2     | 7      |
 
 
 
