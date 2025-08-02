@@ -24,25 +24,27 @@
     <button id="dark-mode">☀️</button>
   </header>
 
-  <div class="up-container">
-    <div class="card">
-      <p class="first">ENTER YOUR LOCATION</p>
-      <input type="text" id="city-input" placeholder="Enter city, State name or ZIP Code" oninput="autoComplete()" />
-      <div id="suggestion-box">
-        <div id="suggestion-0" class="suggestion"></div>
-        <div id="suggestion-1" class="suggestion"></div>
-        <div id="suggestion-2" class="suggestion"></div>
-        <div id="suggestion-3" class="suggestion"></div>
-        <div id="suggestion-4" class="suggestion"></div>
-      </div>
-      <button onclick="getWeatherByCity()">Search</button>
-      <p class="or">OR</p>
-      <button onclick="getWeatherByLocation()" id="locate">Use Current Location</button>
+ <div class="up-container">
+  <div class="card">
+    <p class="first">ENTER YOUR LOCATION</p>
+    <input type="text" id="city-input" placeholder="Enter city, State name or ZIP Code" oninput="autoComplete()" />
+    <div id="suggestion-box">
+      <div id="suggestion-0" class="suggestion"></div>
+      <div id="suggestion-1" class="suggestion"></div>
+      <div id="suggestion-2" class="suggestion"></div>
+      <div id="suggestion-3" class="suggestion"></div>
+      <div id="suggestion-4" class="suggestion"></div>
     </div>
-    <div class="map-container">
-      <div id="map"></div>
-    </div>
+    <div id="validationMsg" class="hidden"></div>
+    <button onclick="getWeatherByCity()">Search</button>
+    <p class="or">OR</p>
+    <button onclick="getWeatherByLocation()" id="locate">Use Current Location</button>
   </div>
+  <div class="map-container">
+    <div id="map"></div>
+  </div>
+</div>
+
 
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
     <h2 style="margin: 0;" id="weat">Weather Information</h2>

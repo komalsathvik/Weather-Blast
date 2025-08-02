@@ -46,6 +46,19 @@ header {
     transform: scale(1.1);
 }
 
+#validationMsg {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: #d32f2f;
+  font-size: 1.25em;  
+  font-weight: 700;       
+  
+}
+.hidden {
+  display: none;
+}
+
+
 body,
 table,
 th,

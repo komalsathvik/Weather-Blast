@@ -93,8 +93,18 @@ function updateSuggestions(suggestions) {
 
 // === FETCH WEATHER FOR CITY ===
 function getWeatherByCity() {
-    const city = document.getElementById("city-input").value;
-    if (!city) return alert("PLEASE ENTER CITY NAME");
+    const cityInput = document.getElementById("city-input");
+    const city = cityInput.value.trim();
+    const validationMsg = document.getElementById("validationMsg");
+
+    if (!city) {
+        validationMsg.textContent = "Oops! Empty Input ";
+        validationMsg.classList.remove("hidden");
+        cityInput.focus();
+        return;
+    }
+
+    validationMsg.classList.add("hidden");
     isUserSearch = true;
     fetchWeatherByCity(city);
 }
@@ -714,9 +724,18 @@ function renderRecentSearches() {
 
 // On Search button click, update recent searches and fetch weather
 searchBtn.addEventListener('click', () => {
-  const query = searchInput.value.trim();
-  if (!query) return alert("PLEASE ENTER CITY NAME");
-  updateRecentSearches(query);
+    const query = searchInput.value.trim();
+    const validationMsg = document.getElementById("validationMsg");
+
+    if (!query) {
+        validationMsg.textContent = "Oops! Empty Input";
+        validationMsg.classList.remove("hidden");
+        searchInput.focus();
+        return;
+    }
+
+    validationMsg.classList.add("hidden");
+    updateRecentSearches(query);
 });
 
 // Reset recent searches and update display
