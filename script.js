@@ -224,7 +224,7 @@ function displayWeather(data) {
     const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', opt);
     const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', opt);
     const { lat, lon } = data.coord;
-
+    initMap1(data);
     fetchPollution(lat, lon);
     getWeatherForecast(lat, lon);
 
