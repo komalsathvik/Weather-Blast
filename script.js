@@ -5,6 +5,238 @@ const opt = { timeStyle: 'short', hour12: true }; // Time formatting options
 
 let map; // Global map object
 
+// === NAVBAR FUNCTIONALITY ===
+function showSection(sectionName) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => section.classList.remove('active'));
+    
+    // Get the original home content
+    const originalHomeContent = document.getElementById('original-home-content');
+    
+    if (sectionName === 'home') {
+        // Show original home content, hide all other sections
+        originalHomeContent.style.display = 'block';
+    } else {
+        // Hide original home content and show selected section
+        originalHomeContent.style.display = 'none';
+        const targetSection = document.getElementById(sectionName + '-section');
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+    }
+    
+    // Update active nav link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`[onclick="showSection('${sectionName}')"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+    
+    // Load content based on section
+    if (sectionName === 'news') {
+        loadWeatherNews();
+    } else if (sectionName === 'alerts') {
+        loadWeatherAlerts();
+    }
+}
+
+// === MOBILE MENU FUNCTIONALITY ===
+function toggleMobileMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('mobile-open');
+}
+
+// === WEATHER NEWS FUNCTIONALITY ===
+async function loadWeatherNews() {
+    const newsGrid = document.getElementById('news-grid');
+    newsGrid.innerHTML = '<div class="news-card"><h3>Loading weather news...</h3></div>';
+    
+    try {
+        // Simulated news data (replace with real API call)
+        const newsData = [
+            {
+                title: "Severe Thunderstorm Warning",
+                description: "Heavy rainfall and strong winds expected in the northeastern regions.",
+                time: "2 hours ago",
+                type: "warning"
+            },
+            {
+                title: "Heat Wave Advisory",
+                description: "Temperatures expected to reach 40°C in central areas. Stay hydrated.",
+                time: "4 hours ago",
+                type: "advisory"
+            },
+            {
+                title: "Air Quality Alert",
+                description: "Poor air quality detected due to dust storms. Limit outdoor activities.",
+                time: "6 hours ago",
+                type: "alert"
+            }
+        ];
+        
+        newsGrid.innerHTML = '';
+        newsData.forEach(news => {
+            const newsCard = document.createElement('div');
+            newsCard.className = 'news-card';
+            newsCard.innerHTML = `
+                <h3>${news.title}</h3>
+                <p>${news.description}</p>
+                <small>🕒 ${news.time}</small>
+            `;
+            newsGrid.appendChild(newsCard);
+        });
+    } catch (error) {
+        newsGrid.innerHTML = '<div class="news-card"><h3>Error loading news</h3><p>Please try again later.</p></div>';
+    }
+}
+
+// === WEATHER ALERTS FUNCTIONALITY ===
+async function loadWeatherAlerts() {
+    const alertsList = document.getElementById('alerts-list');
+    
+    // Simulated alerts data
+    const alertsData = [
+        {
+            type: "warning",
+            title: "Heavy Rain Warning",
+            description: "Expect heavy rainfall for the next 6 hours. Avoid traveling if possible.",
+            time: "Active now"
+        },
+        {
+            type: "info",
+            title: "Temperature Drop",
+            description: "Temperature will drop by 10°C tonight. Dress warmly.",
+            time: "Starting tonight"
+        }
+    ];
+    
+    alertsList.innerHTML = '';
+    alertsData.forEach(alert => {
+        const alertCard = document.createElement('div');
+        alertCard.className = `alert-card ${alert.type}`;
+        alertCard.innerHTML = `
+            <i class="fas fa-${alert.type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+            <div>
+                <h4>${alert.title}</h4>
+                <p>${alert.description}</p>
+                <small>${alert.time}</small>
+            </div>
+        `;
+        alertsList.appendChild(alertCard);
+    });
+}
+
+// === FILTER ALERTS FUNCTIONALITY ===
+function filterAlerts(type) {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter logic would go here
+    console.log('Filtering alerts by:', type);
+}
+
+// === FAVORITES FUNCTIONALITY ===
+let weatherUpdateCount = 0;
+
+function updateFavoriteStats() {
+    // Total favorites
+    const favoriteCards = document.querySelectorAll('.favorite-card');
+    // Exclude sample card if present
+    const realCards = Array.from(favoriteCards).filter(card => !card.classList.contains('sample'));
+    document.getElementById('total-favorites').textContent = realCards.length;
+
+    // Most recent favorite location name
+    let recent = '--';
+    if (realCards.length > 0) {
+        recent = realCards[realCards.length - 1].querySelector('h4').textContent.trim();
+    }
+    document.getElementById('recent-favorite').textContent = recent;
+
+    // Weather updates
+    document.getElementById('weather-updates').textContent = weatherUpdateCount;
+}
+
+function addFavoriteLocation() {
+    const input = document.getElementById('favorite-input');
+    const location = input.value.trim();
+    if (location) {
+        const favoritesList = document.getElementById('favorites-list');
+        const favoriteCard = document.createElement('div');
+        favoriteCard.className = 'favorite-card';
+        favoriteCard.innerHTML = `
+            <div class="favorite-info">
+                <h4>${location}</h4>
+                <p>Loading weather...</p>
+            </div>
+            <div class="favorite-actions">
+                <button onclick="loadFavoriteWeather('${location}')">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <button onclick="removeFavorite('${location}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+        favoritesList.appendChild(favoriteCard);
+        input.value = '';
+        updateFavoriteStats();
+        // Load weather for the new favorite
+        loadFavoriteWeather(location);
+    }
+}
+
+function removeFavorite(location) {
+    if (confirm(`Remove ${location} from favorites?`)) {
+        // Find and remove the favorite card
+        const favoriteCards = document.querySelectorAll('.favorite-card');
+        favoriteCards.forEach(card => {
+            const locationName = card.querySelector('h4').textContent;
+            if (locationName === location) {
+                card.remove();
+            }
+        });
+        updateFavoriteStats();
+    }
+}
+
+function loadFavoriteWeather(location) {
+    console.log('Loading weather for:', location);
+    // Switch to home section and search for this location
+    showSection('home');
+    document.getElementById('city-input').value = location;
+    getWeatherByCity();
+    weatherUpdateCount++;
+    updateFavoriteStats();
+}
+
+// === BACK TO TOP FUNCTIONALITY ===
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Show/hide back to top button based on scroll position
+window.addEventListener('scroll', function() {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'block';
+    } else {
+        backToTopBtn.style.display = 'none';
+    }
+});
+
+// === Initialize on page load ===
+document.addEventListener('DOMContentLoaded', function() {
+    // Show home section by default
+    showSection('home');
+    updateFavoriteStats();
+});
+
 // === Check Toggle State ===
 function isFahrenheitToggled() {
     const toggle = document.getElementById("unitToggle");
@@ -152,28 +384,93 @@ function displayWeather(data) {
     document.getElementById("weat").innerText = `Weather Information : ${city}`;
     document.getElementById("air").innerText = `Air Pollution : ${city}`;
 
-    // Store base Celsius temp in dataset
+    // Store base data in dataset for unit conversion
     ["temp", "fl", "temp1", "fl1"].forEach(id => {
         document.getElementById(id).dataset.celsius = id.includes("fl") ? feels_like : temp;
     });
+    
+    // Store wind speed and pressure data for unit conversion
+    ["ws", "ws1"].forEach(id => {
+        const element = document.getElementById(id);
+        element.dataset.windMs = windSpeed;
+    });
+    
+    ["press", "press1"].forEach(id => {
+        const element = document.getElementById(id);
+        element.dataset.pressureHpa = pressure;
+    });
 
-    // Detect toggle and update unit display
-    const isCelsius = !isFahrenheitToggled();
+    // Apply current unit settings
+    const settings = getSettings();
+    const isCelsius = settings.tempUnit === 'celsius';
     updateTemperatureDisplay(isCelsius);
 
-    // Update UI (non-temperature)
+    // Update UI (non-convertible data)
     ["wi", "wi1"].forEach(id => document.getElementById(id).innerText = weatherdes);
     ["date", "date1"].forEach(id => document.getElementById(id).innerText = date);
     ["city", "city1"].forEach(id => document.getElementById(id).innerText = city);
     ["humi", "humi1"].forEach(id => document.getElementById(id).innerText = `${humidity}%`);
-    ["press", "press1"].forEach(id => document.getElementById(id).innerText = `${pressure} hPa`);
     ["visi", "visi1"].forEach(id => document.getElementById(id).innerText = `${visibility} Km`);
-    ["ws", "ws1"].forEach(id => document.getElementById(id).innerText = `${windSpeed} m/s`);
     ["sr", "sr1"].forEach(id => document.getElementById(id).innerText = sunrise);
     ["ss", "ss1"].forEach(id => document.getElementById(id).innerText = sunset);
     ["cc", "cc1"].forEach(id => document.getElementById(id).innerText = country);
+    
+    // Update units-based data
+    ["press", "press1"].forEach(id => document.getElementById(id).innerText = convertPressure(pressure));
+    ["ws", "ws1"].forEach(id => document.getElementById(id).innerText = convertWindSpeed(windSpeed));
 
     document.getElementById("city-input").value = '';
+}
+
+// === UNIT CONVERSION UTILITIES ===
+function getSettings() {
+    const savedSettings = localStorage.getItem('weatherBlastSettings');
+    if (savedSettings) {
+        return JSON.parse(savedSettings);
+    }
+    return {
+        tempUnit: 'celsius',
+        windUnit: 'kmh',
+        pressureUnit: 'hpa'
+    };
+}
+
+function convertTemperature(tempC, targetUnit = null) {
+    const settings = getSettings();
+    const unit = targetUnit || settings.tempUnit;
+    
+    if (unit === 'fahrenheit') {
+        return `${((tempC * 9/5) + 32).toFixed(1)}°F`;
+    }
+    return `${tempC.toFixed(1)}°C`;
+}
+
+function convertWindSpeed(speedMs, targetUnit = null) {
+    const settings = getSettings();
+    const unit = targetUnit || settings.windUnit;
+    
+    switch(unit) {
+        case 'mph':
+            return `${(speedMs * 2.237).toFixed(1)} mph`;
+        case 'kmh':
+            return `${(speedMs * 3.6).toFixed(1)} km/h`;
+        default: // ms
+            return `${speedMs.toFixed(1)} m/s`;
+    }
+}
+
+function convertPressure(pressureHpa, targetUnit = null) {
+    const settings = getSettings();
+    const unit = targetUnit || settings.pressureUnit;
+    
+    switch(unit) {
+        case 'mb':
+            return `${pressureHpa.toFixed(1)} mb`;
+        case 'inhg':
+            return `${(pressureHpa * 0.02953).toFixed(2)} inHg`;
+        default: // hpa
+            return `${pressureHpa.toFixed(1)} hPa`;
+    }
 }
 
 // === CONVERSION HELPERS ===
@@ -181,18 +478,38 @@ function celsiusToFahrenheit(c) { return (c * 9 / 5) + 32; }
 function fahrenheitToCelsius(f) { return (f - 32) * 5 / 9; }
 
 // === TOGGLE CELSIUS/FAHRENHEIT DISPLAY ===
-function updateTemperatureDisplay(isCelsius) {
+function updateTemperatureDisplay(forceCelsius = null) {
+    const settings = getSettings();
+    const isCelsius = forceCelsius !== null ? forceCelsius : (settings.tempUnit === 'celsius');
+    
+    // Update the toggle switch to match settings
+    const unitToggle = document.getElementById('unitToggle');
+    if (unitToggle) {
+        unitToggle.checked = !isCelsius;
+    }
+    
     const elements = ["temp", "fl", "temp1", "fl1"];
     elements.forEach(id => {
         const el = document.getElementById(id);
-        const c = parseFloat(el.dataset.celsius);
-        if (isCelsius) {
-            el.innerText = `${c.toFixed(1)}°C`;
-        } else {
-            const f = celsiusToFahrenheit(c);
-            el.innerText = `${f.toFixed(1)}°F`;
+        if (el && el.dataset.celsius) {
+            const c = parseFloat(el.dataset.celsius);
+            el.innerText = convertTemperature(c, isCelsius ? 'celsius' : 'fahrenheit');
         }
     });
+    
+    // Update all temperature elements with data-celsius attribute
+    const tempElements = document.querySelectorAll('[data-celsius]');
+    tempElements.forEach(element => {
+        const tempC = parseFloat(element.dataset.celsius);
+        if (!isNaN(tempC)) {
+            element.textContent = convertTemperature(tempC, isCelsius ? 'celsius' : 'fahrenheit');
+        }
+    });
+    
+    // Refresh forecast with updated unit
+    if (lastForecastData) {
+        showWeatherForecast(lastForecastData);
+    }
 }
 // === FETCH POLLUTION DATA ===
 function fetchPollution(lat, lon) { 
@@ -240,12 +557,15 @@ function getWeatherForecast(lat, lon) {
         });
 }
 
-function convertTemp(temp, isCelsius) {
-    return isCelsius ? `${temp.toFixed(1)} °C` : `${((temp * 9/5) + 32).toFixed(1)} °F`;
+function convertTemp(temp, isCelsius = null) {
+    const settings = getSettings();
+    const useCelsius = isCelsius !== null ? isCelsius : (settings.tempUnit === 'celsius');
+    return convertTemperature(temp, useCelsius ? 'celsius' : 'fahrenheit');
 }
 
 function showWeatherForecast(data) {
-    const isCelsius = !document.getElementById('unitToggle').checked;
+    const settings = getSettings();
+    const isCelsius = settings.tempUnit === 'celsius';
     const forecast = data.daily.slice(0, 8);
     const opt = { hour: '2-digit', minute: '2-digit' };
 
@@ -312,17 +632,26 @@ darkbtn.addEventListener('click', changedisplay);
 
 // Temperature toggle listener
 function updateTemperatureDisplay(isCelsius) {
+    const settings = getSettings();
+    const useCelsius = isCelsius !== undefined ? isCelsius : (settings.tempUnit === 'celsius');
+    
     const tempElements = document.querySelectorAll('[data-celsius]');
     tempElements.forEach(element => {
         const tempC = parseFloat(element.dataset.celsius);
-        const displayTemp = isCelsius ? `${tempC.toFixed(1)}°C` : `${((tempC * 9/5) + 32).toFixed(1)}°F`;
-        element.textContent = displayTemp;
+        if (!isNaN(tempC)) {
+            element.textContent = convertTemperature(tempC, useCelsius ? 'celsius' : 'fahrenheit');
+        }
     });
 
-    const currentTemp = parseFloat(document.getElementById('temp').dataset.celsius);
-    const feelsLikeTemp = parseFloat(document.getElementById('fl').dataset.celsius);
-    document.getElementById('temp').textContent = isCelsius ? `${currentTemp}°C` : `${(currentTemp * 9/5 + 32).toFixed(1)}°F`;
-    document.getElementById('fl').textContent = isCelsius ? `${feelsLikeTemp}°C` : `${(feelsLikeTemp * 9/5 + 32).toFixed(1)}°F`;
+    const currentTemp = parseFloat(document.getElementById('temp')?.dataset.celsius);
+    const feelsLikeTemp = parseFloat(document.getElementById('fl')?.dataset.celsius);
+    
+    if (!isNaN(currentTemp)) {
+        document.getElementById('temp').textContent = convertTemperature(currentTemp, useCelsius ? 'celsius' : 'fahrenheit');
+    }
+    if (!isNaN(feelsLikeTemp)) {
+        document.getElementById('fl').textContent = convertTemperature(feelsLikeTemp, useCelsius ? 'celsius' : 'fahrenheit');
+    }
 
     // Refresh forecast with updated unit
     if (lastForecastData) {
@@ -348,8 +677,35 @@ function getWeatherForecast(lat, lon) {
 
 // Temperature unit toggle listener
 const unitToggle = document.getElementById('unitToggle');
-unitToggle.addEventListener('change', function () {
-    const isCelsius = !this.checked;
+if (unitToggle) {
+    unitToggle.addEventListener('change', function () {
+        const isCelsius = !this.checked;
+        // Update settings when toggle is used
+        const settings = getSettings();
+        settings.tempUnit = isCelsius ? 'celsius' : 'fahrenheit';
+        localStorage.setItem('weatherBlastSettings', JSON.stringify(settings));
+        
+        updateTemperatureDisplay(isCelsius);
+        
+        // Update settings UI if it exists
+        const tempUnitSetting = document.getElementById('temp-unit-setting');
+        if (tempUnitSetting) {
+            tempUnitSetting.value = settings.tempUnit;
+        }
+    });
+}
+
+// Initialize temperature display with saved settings
+document.addEventListener('DOMContentLoaded', function() {
+    const settings = getSettings();
+    const isCelsius = settings.tempUnit === 'celsius';
+    
+    // Set toggle to match settings
+    if (unitToggle) {
+        unitToggle.checked = !isCelsius;
+    }
+    
+    // Apply initial temperature display
     updateTemperatureDisplay(isCelsius);
 });
 
