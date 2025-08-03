@@ -329,7 +329,7 @@ function fetchWeatherByCity(city) {
             if (!res.ok) throw new Error('City not found');
             return res.json();
         })
-        .then(data => displayWeather(data))
+        .then(data => getUvData(data))
         .catch(err => {
             console.error(err);
             fetchLatLon(city);
@@ -359,14 +359,24 @@ function fetchWeatherByCoordinates(lat, lon) {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            displayWeather(data);
+            getUvData(data);
             initMap1(data);
         })
         .catch(err => console.error(err));
 }
 
+// === GET UV Index Info ===
+
+function getUvData(data){
+      const url = `https://api.openweathermap.org/data/2.5//uvi?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}`;
+      fetch(url)
+      .then(res => res.json())
+      .then(uvdata => displayWeather(data,uvdata))
+}
+
+
 // === DISPLAY WEATHER DETAILS IN UI ===
-function displayWeather(data) {
+function displayWeather(data,uvdata) {
     const { temp, feels_like, humidity, pressure } = data.main;
     const visibility = data.visibility / 1000;
     const windSpeed = data.wind.speed;
@@ -410,6 +420,7 @@ function displayWeather(data) {
     ["date", "date1"].forEach(id => document.getElementById(id).innerText = date);
     ["city", "city1"].forEach(id => document.getElementById(id).innerText = city);
     ["humi", "humi1"].forEach(id => document.getElementById(id).innerText = `${humidity}%`);
+    ['bigUV','smallUV'].forEach(id => document.getElementById(id).innerText = `${uvdata.value}`);
     ["visi", "visi1"].forEach(id => document.getElementById(id).innerText = `${visibility} Km`);
     ["sr", "sr1"].forEach(id => document.getElementById(id).innerText = sunrise);
     ["ss", "ss1"].forEach(id => document.getElementById(id).innerText = sunset);
