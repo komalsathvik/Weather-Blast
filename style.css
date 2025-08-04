@@ -1368,3 +1368,10 @@ footer {
     transition: 0.3s;
     color:#5e9688
 }
+
+/* Add to your CSS file */
+#search-loader {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+}
