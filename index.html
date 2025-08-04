@@ -226,6 +226,13 @@
                 <p class="first">ENTER YOUR LOCATION</p>
                 <input type="text" id="city-input" placeholder="Enter city, State name or ZIP Code"
                     oninput="autoComplete()">
+                <div id="search-loader" style="display:none; text-align:center; margin-top:10px;">
+                  <svg width="40" height="40" viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="16" stroke="#3498db" stroke-width="4" fill="none" stroke-dasharray="100" stroke-dashoffset="60">
+                      <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                  </svg>
+                </div>
                 <div id="suggestion-box">
                     <div id="suggestion-0" class="suggestion"></div>
                     <div id="suggestion-1" class="suggestion"></div>

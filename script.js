@@ -300,25 +300,20 @@ function updateSuggestions(suggestions) {
     });
 }
 
+// === SHOW LOADER ===
+function showLoader() {
+    document.getElementById('search-loader').style.display = 'block';
+}
+function hideLoader() {
+    document.getElementById('search-loader').style.display = 'none';
+}
+
 // === FETCH WEATHER FOR CITY ===
 function getWeatherByCity() {
     const city = document.getElementById("city-input").value;
     if (!city) return alert("PLEASE ENTER CITY NAME");
+    showLoader();
     fetchWeatherByCity(city);
-}
-
-// === FETCH WEATHER FOR CURRENT LOCATION ===
-function getWeatherByLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-            const lat = pos.coords.latitude;
-            const lon = pos.coords.longitude;
-            fetchWeatherByCoordinates(lat, lon);
-            initMap1({ coord: { lat, lon } });
-        }, () => alert("Unable to retrieve your location."));
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
 }
 
 // === GET WEATHER FROM CITY NAME ===
@@ -329,8 +324,12 @@ function fetchWeatherByCity(city) {
             if (!res.ok) throw new Error('City not found');
             return res.json();
         })
-        .then(data => getUvData(data))
+        .then(data => {
+            hideLoader();
+            getUvData(data);
+        })
         .catch(err => {
+            hideLoader();
             console.error(err);
             fetchLatLon(city);
         });
@@ -345,9 +344,11 @@ function fetchLatLon(city) {
             if (!data.results || !data.results.length) throw new Error("No results");
             const lat = data.results[0].lat;
             const lon = data.results[0].lon;
+            hideLoader();
             fetchWeatherByCoordinates(lat, lon);
         })
         .catch(err => {
+            hideLoader();
             console.error(err);
             alert("Invalid location. Try again.");
         });
@@ -359,14 +360,17 @@ function fetchWeatherByCoordinates(lat, lon) {
     fetch(url)
         .then(res => res.json())
         .then(data => {
+            hideLoader();
             getUvData(data);
             initMap1(data);
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            hideLoader();
+            console.error(err);
+        });
 }
 
-// === GET UV Index Info ===
-
+// === UV INDEX FUNCTIONALITY ===
 function getUvData(data){
       const url = `https://api.openweathermap.org/data/2.5//uvi?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}`;
       fetch(url)
