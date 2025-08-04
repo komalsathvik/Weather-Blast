@@ -255,7 +255,23 @@ window.onload = initMap;
 function initMap1(data) {
     const latitude = data.coord.lat;
     const longitude = data.coord.lon;
-    map = new mappls.Map("map", { center: [latitude, longitude] });
+
+    map = new mappls.Map("map", {
+        center: [latitude, longitude],
+        zoom: 10
+    });
+
+    // Wait until map is ready to add marker
+    map.addListener('load', () => {
+        new mappls.Marker({
+            map: map,
+            position: {
+                lat: latitude,
+                lng: longitude
+            },
+            title: data.name || "Selected Location"
+        });
+    });
 }
 
 // === AUTOCOMPLETE LOCATION INPUT ===
@@ -431,6 +447,7 @@ function displayWeather(data,uvdata) {
     ["ws", "ws1"].forEach(id => document.getElementById(id).innerText = convertWindSpeed(windSpeed));
 
     document.getElementById("city-input").value = '';
+    document.querySelector(".weather-info-header").scrollIntoView({ behavior: "smooth" });
 }
 
 // === UNIT CONVERSION UTILITIES ===
@@ -735,3 +752,6 @@ function scrollToTop() {
 }
 
 
+window.addEventListener("beforeunload", function () {
+    window.scrollTo(0, 0);
+});
