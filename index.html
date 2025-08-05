@@ -240,7 +240,12 @@
                     <div id="suggestion-3" class="suggestion"></div>
                     <div id="suggestion-4" class="suggestion"></div>
                 </div>
-                <button onclick="getWeatherByCity()">Search</button>
+                <div class="search-buttons">
+                    <button onclick="getWeatherByCity()" style="margin-left: 10px;">Search</button>
+                    <button onclick="refreshWeatherData()" id="refresh-button" title="Refresh Weather">
+                    <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
                 <p class="or">OR</p>
                 <button onclick="getWeatherByLocation()" id="locate">Use Current Location</button>
             </div>
