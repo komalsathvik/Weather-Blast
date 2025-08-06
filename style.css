@@ -1337,30 +1337,34 @@ input:checked + .slider:before {
     --text-stroke: 1px black;
 }
 
+/* === Footer Base === */
 footer {
     background-color: var(--primary-color);
-    padding: 3rem 1.5rem;
+    padding: 1.5rem 1rem;
     font-family: 'Fira Code', monospace;
     color: var(--accent-color);
     border-top: 2px solid var(--accent-color);
     margin-top: 60px;
-    width: 100%; /* Ensure full width */
-    box-sizing: border-box; /* Include padding in width calculation */
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* === Container === */
 .footer-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 1200px; /* FIXED: Now limits content width */
+    width: 100%;
     margin: 0 auto;
     gap: 2rem;
 }
 
+/* === Footer Sections === */
 .footer-brand, .footer-contact, .footer-links {
     flex: 1 1 0;
-    min-width: 200px;
+    min-width: 250px;
 }
 
 .footer-brand h2 {
@@ -1372,9 +1376,12 @@ footer {
 .footer-brand p {
     font-size: 1rem;
     line-height: 1.6;
+    margin-top: 0.5rem;
 }
 
+/* === Contact Section === */
 .footer-contact {
+   
     text-align: center;
 }
 
@@ -1401,6 +1408,7 @@ footer {
     filter: brightness(0.7);
 }
 
+/* === Useful Links === */
 .footer-links {
     text-align: center;
 }
@@ -1412,7 +1420,7 @@ footer {
 }
 
 .footer-links a {
-    display: block; /* <-- Stack links vertically */
+    display: block;
     text-decoration: none;
     color: var(--accent-color);
     font-size: 0.95rem;
@@ -1424,26 +1432,26 @@ footer {
     color: #5e9688;
 }
 
+/* === Copyright Box === */
 .footer-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(to right, #e6f3ee, #f6fcfa);
-    border-radius: 12px;
+    margin-top: 2rem;
+    padding: 0.5rem 2rem;
     max-width: 1200px;
     margin-inline: auto;
-    gap: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.4); /* Lighter background */
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
     text-align: center;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .footer-bottom p {
-    font-size: 0.9rem;
-    color: var(--accent-color);
+    margin: 0.5rem 0;
 }
 
-/* Responsive */
+/* === Responsive Styles === */
 @media (max-width: 768px) {
     .footer-container {
         justify-content: center;
@@ -1470,5 +1478,9 @@ footer {
     .footer-brand, .footer-contact, .footer-links {
         flex: none;
         width: 100%;
+    }
+
+    .footer-bottom {
+        padding: 1rem;
     }
 }
