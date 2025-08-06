@@ -35,9 +35,8 @@
 | [86](https://github.com/RAJIV81205/Weather-Blast/issues/86)   | Adding UV Index Info                                                                              | [Sameeralam9](https://github.com/Sameeralam9)                                                                                | 2     | 7      |
 | [77](https://github.com/RAJIV81205/Weather-Blast/issues/77)   | Add a loading indicator while fetching weather data                                               | [aniket0807](https://github.com/aniket0807)                                                                                  | 2     | 7      |
 | [94](https://github.com/RAJIV81205/Weather-Blast/issues/94)   | Marker Not Showing & Auto-Scroll Broken After Recent Changes                                      | [DivyanshGarg380](https://github.com/DivyanshGarg380)                                                                        | 2     | 7      |
-| [78](https://github.com/RAJIV81205/Weather-Blast/issues/78)   | Add the Refresh Button                                                                            | lohi-cell                                                                                                                    | 2     | 7      |
+| [78](https://github.com/RAJIV81205/Weather-Blast/issues/78)   | Add the Refresh Button                                                                            | [lohi-cell](https://github.com/lohi-cell)                                                                                    | 2     | 7      |
 | [102](https://github.com/RAJIV81205/Weather-Blast/issues/102) | Improve the Footer Design and Accessibility                                                       | [diyakotru](https://github.com/diyakotru)                                                                                    | 2     | 7      |
-
 
 **🚀 Live Demo:** [Weather Blast](https://weather-blast.netlify.app/)
 
