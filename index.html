@@ -433,31 +433,50 @@
         </table>
     </div>
 
-    <footer class="footer">
-        <div class="footer-left">
+    <footer>
+    <div class="footer-container">
+        <!-- Brand Section -->
+        <div class="footer-brand">
             <h2>{Weather-Blast}</h2>
             <p>Know the weather. Breathe better. Plan smarter.</p>
         </div>
 
-        <div class="footer-center">
-            <p>Contact Us:</p>
-            <div class="social-icons">
-                <a href="#" aria-label="Instagram">
-                    <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000" alt="Instagram">
+        <!-- Contact Section -->
+        <div class="footer-links">
+            <h4>Contact Us</h4>
+            <div class="links">
+                <a href="<------add-instagram------>">
+                    <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000" width="30">
                 </a>
-                <a href="#" aria-label="LinkedIn">
-                    <img src="https://img.icons8.com/?size=100&id=13930&format=png&color=000000" alt="LinkedIn">
+                <a href="<------add-linkedin----->">
+                    <img src="https://img.icons8.com/?size=100&id=13930&format=png&color=000000" width="30">
                 </a>
-                <a href="https://github.com/RAJIV81205" aria-label="GitHub">
-                    <img src="https://img.icons8.com/?size=100&id=62856&format=png&color=000000" alt="GitHub">
+                <a href="https://github.com/RAJIV81205">
+                    <img src="https://img.icons8.com/?size=100&id=62856&format=png&color=000000" width="30">
                 </a>
             </div>
         </div>
-        <div class="footer-right">
-            <p>© 2025 Weather-Blast. All rights reserved.</p>
-            <p>Developed and contributed by <strong>Rajiv Dubey</strong> and contributors</p>
+
+        <!-- Placeholder Column (can be replaced with links or left empty) -->
+        <div class="footer-links">
+            <h4>Useful Links</h4>
+            <a href="#home" onclick="showSection('home')">Home</a>
+            <a href="#news" onclick="showSection('news')">Weather News</a>
+            <a href="#settings" onclick="showSection('settings')">Settings</a>
+            <a href="#footer">Contact</a>
         </div>
-    </footer>
+
+        <!-- Empty Column for symmetry (optional) -->
+        <div></div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 Weather-Blast. All rights reserved.</p>
+        <p>Developed and contributed by <strong>Rajiv Dubey</strong> and contributors</p>
+    </div>
+</footer>
+
+
 
     <script src="script.js"></script>
     <script src="js/main.js"></script>
